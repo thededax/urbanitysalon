@@ -2,417 +2,1440 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "motion/react";
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
-const testimonials = [
+// Ritual Data Definition
+interface RitualItem {
+  id: string;
+  name: string;
+  category: "cuts" | "color" | "keratin" | "skin" | "bridal";
+  duration: string;
+  formulation: string;
+  seniorPrice: string;
+  directorPrice: string;
+  image: string;
+  caption: string;
+  benefits: string[];
+}
+
+const RITUALS: RitualItem[] = [
   {
-    quote: "They don't just alter your hair; they architect a silhouette that completely reframes how the world perceives you. An absolute masterclass in quiet luxury.",
+    id: "precision-cut",
+    name: "Precision Haircut & Cranial Architecture",
+    category: "cuts",
+    duration: "60 Mins",
+    formulation: "Facial silhouette mapping, Japanese steel dry-shear detailing, scalp cleanse & signature blowout finish.",
+    seniorPrice: "₹500+",
+    directorPrice: "₹1,200+",
+    image: "https://www.image2url.com/r2/default/images/1777307741859-556a190c-8262-40d2-9daa-a8bd69a11415.png",
+    caption: "Cranial balance analysis & natural movement sculpting.",
+    benefits: ["Custom Cranial Face-Mapping", "Japanese Steel Detailing", "Botanical Fiber Wash"],
+  },
+  {
+    id: "french-balayage",
+    name: "Dimensional French Balayage & Glaze",
+    category: "color",
+    duration: "180 Mins",
+    formulation: "Freehand hand-painted gradient, micro-foil architecture, bond-protecting peptides & bespoke tone glaze.",
+    seniorPrice: "₹3,500+",
+    directorPrice: "₹6,500+",
+    image: "https://i.ibb.co/DDcytst4/Chat-GPT-Image-Apr-28-2026-04-40-10-AM.png",
+    caption: "Seamless sun-kissed depth with zero harsh demarcation.",
+    benefits: ["Ammonia-Free Lighteners", "Bio-Peptide Bond Repair", "Custom Cool/Warm Glaze"],
+  },
+  {
+    id: "bio-keratin",
+    name: "Bio-Keratin & Silk Protein Infusion",
+    category: "keratin",
+    duration: "150 Mins",
+    formulation: "Formaldehyde-free bio-identical keratin and silk amino infusion sealing hair cuticle for 4+ months of glassy shine.",
+    seniorPrice: "₹4,500+",
+    directorPrice: "₹7,500+",
+    image: "https://i.ibb.co/dwfWDqpj/Chat-GPT-Image-Apr-28-2026-12-58-09-AM.png",
+    caption: "Frizz eradication with restored fiber density and elasticity.",
+    benefits: ["100% Formaldehyde-Free", "High-Humidity Resistance", "Glass-Coat Mirror Finish"],
+  },
+  {
+    id: "scalp-trichology",
+    name: "Scalp Trichology & Botanical Stem-Cell Ritual",
+    category: "keratin",
+    duration: "75 Mins",
+    formulation: "Micro-exfoliating scalp peel, ultrasonic dermal massage, red-light stimulation & rosemary stem-cell serum.",
+    seniorPrice: "₹2,200+",
+    directorPrice: "₹3,500+",
+    image: "https://www.image2url.com/r2/default/images/1777307634569-bea49379-40fc-4802-a92a-32884a979934.png",
+    caption: "Cellular rejuvenation for stressed follicles and hair thinning.",
+    benefits: ["Cranial Lymphatic Drainage", "Rosemary Botanical Actives", "Microcirculation Activation"],
+  },
+  {
+    id: "hydra-radiance",
+    name: "Hydra-Radiance Cellular Facial",
+    category: "skin",
+    duration: "60 Mins",
+    formulation: "Ultrasonic infusion of multi-molecular hyaluronic acids, botanical antioxidants, and facial sculpt massage.",
+    seniorPrice: "₹2,500+",
+    directorPrice: "₹3,800+",
+    image: "https://i.ibb.co/3mSJfP27/Chat-GPT-Image-Apr-27-2026-10-19-32-PM.png",
+    caption: "Instant lit-from-within glow with non-comedogenic active hydration.",
+    benefits: ["Triple-Weight Hyaluronic Acid", "Lymphatic Contour Massage", "Instant Dewy Glow"],
+  },
+  {
+    id: "russian-manicure",
+    name: "Luxury Russian Manicure & Nail Architecture",
+    category: "skin",
+    duration: "60 Mins",
+    formulation: "E-file dry cuticle precision, keratin reinforcement layer, and chip-resistant non-toxic gel glaze.",
+    seniorPrice: "₹1,200+",
+    directorPrice: "₹1,800+",
+    image: "https://i.ibb.co/7NjTLpFP/Chat-GPT-Image-Apr-27-2026-10-16-43-PM.png",
+    caption: "Flawless cuticle contouring lasting up to 4 full weeks.",
+    benefits: ["Diamond-Bit Dry Detailing", "Strengthening Keratin Base", "High-Shine Italian Glaze"],
+  },
+  {
+    id: "evening-couture",
+    name: "Red Carpet Evening Couture Glamour",
+    category: "bridal",
+    duration: "90 Mins",
+    formulation: "Airbrushed HD complexion balancing, editorial eye sculpting, and humidity-resistant structural hair styling.",
+    seniorPrice: "₹3,500+",
+    directorPrice: "₹5,500+",
+    image: "https://i.ibb.co/LD6jj4DR/Chat-GPT-Image-Apr-28-2026-04-37-05-AM.png",
+    caption: "High-fashion photographic finish designed to stun in any lighting.",
+    benefits: ["Waterproof Airbrush Formula", "Structural Editorial Updo", "Individual Mink Lashes"],
+  },
+  {
+    id: "bridal-couture-day",
+    name: "Bespoke Bridal Couture Day Ritual",
+    category: "bridal",
+    duration: "240 Mins",
+    formulation: "Private suite access, dedicated master team, full couture hair architecture, HD luxury makeup & veil draping.",
+    seniorPrice: "₹12,000+",
+    directorPrice: "₹18,000+",
+    image: "https://i.ibb.co/gLrDP3Y5/Chat-GPT-Image-Apr-28-2026-12-51-11-AM.png",
+    caption: "The pinnacle bridal experience. Exclusively 1 bride per morning.",
+    benefits: ["Private Privé Suite Access", "Artistic Director Dedicated Team", "Full Trial & Swatch Matching"],
+  },
+];
+
+// Testimonials Data
+const TESTIMONIALS = [
+  {
+    quote: "They do not merely alter your hair; they architect a silhouette that completely reframes how you carry yourself. An absolute masterclass in quiet architectural luxury.",
     name: "Eleanor V.",
     designation: "Editorial Director",
-    src: "https://i.ibb.co/d4pJKsDN/Chat-GPT-Image-Apr-28-2026-12-31-58-AM.png",
+    highlight: "Architectural Silhouette",
   },
   {
-    quote: "The attention to detail is unmatched. Kiran and his team transformed my look with such precision and artistry. It truly feels like a bespoke experience.",
+    quote: "The unhurried consultation and diagnostic precision are unlike anything else. Kiran and his team transformed my color with such organic dimension and zero damage.",
     name: "Ayesha K.",
     designation: "Creative Consultant",
-    src: "https://i.ibb.co/DDcytst4/Chat-GPT-Image-Apr-28-2026-04-40-10-AM.png",
+    highlight: "Dimensional French Balayage",
   },
   {
-    quote: "Every visit is a retreat. The ambiance, the consultation, and the sheer talent of the stylists make it the only place I trust for my aesthetic needs.",
+    quote: "Every visit is a tranquil sanctuary retreat. The acoustic calm, the bespoke formulations, and the master stylists make it the only atelier I trust with my aesthetic.",
     name: "Priya S.",
-    designation: "Founder, Luxe",
-    src: "https://i.ibb.co/LD6jj4DR/Chat-GPT-Image-Apr-28-2026-04-37-05-AM.png",
-  }
+    designation: "Founder, Luxe Living",
+    highlight: "Unhurried Sanctuary",
+  },
+];
+
+// Lookbook Curated Works
+const LOOKBOOK_ITEMS = [
+  {
+    src: "https://www.image2url.com/r2/default/images/1777307741859-556a190c-8262-40d2-9daa-a8bd69a11415.png",
+    title: "Sculptural Silhouette",
+    tag: "HAIR ARCHITECTURE",
+    span: "col-span-1 md:col-span-2 row-span-2",
+  },
+  {
+    src: "https://i.ibb.co/gLrDP3Y5/Chat-GPT-Image-Apr-28-2026-12-51-11-AM.png",
+    title: "Couture Bridal Privé",
+    tag: "BRIDAL COUTURE",
+    span: "col-span-1 md:col-span-1 row-span-2",
+  },
+  {
+    src: "https://i.ibb.co/DDcytst4/Chat-GPT-Image-Apr-28-2026-04-40-10-AM.png",
+    title: "French Balayage Tone",
+    tag: "ARTISANAL COLOR",
+    span: "col-span-1 md:col-span-1 row-span-1",
+  },
+  {
+    src: "https://i.ibb.co/3mSJfP27/Chat-GPT-Image-Apr-27-2026-10-19-32-PM.png",
+    title: "The Atelier Sanctuary",
+    tag: "INTERIOR ARCHITECTURE",
+    span: "col-span-1 md:col-span-1 row-span-1",
+  },
+  {
+    src: "https://i.ibb.co/7NjTLpFP/Chat-GPT-Image-Apr-27-2026-10-16-43-PM.png",
+    title: "Gilded Manicure Precision",
+    tag: "AESTHETICS",
+    span: "col-span-1 md:col-span-1 row-span-1",
+  },
+  {
+    src: "https://i.ibb.co/cc7W5wWV/Chat-GPT-Image-Apr-28-2026-12-25-17-AM.png",
+    title: "The Master Craftsmen",
+    tag: "ARTISTIC DIRECTORS",
+    span: "col-span-1 md:col-span-2 row-span-1",
+  },
 ];
 
 export default function HomePage() {
+  // State for Ritual Menu
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [stylistTier, setStylistTier] = useState<"Senior Stylist" | "Artistic Director">("Artistic Director");
+  const [hoveredRitual, setHoveredRitual] = useState<RitualItem>(RITUALS[0]);
+  const [expandedMobileRitualId, setExpandedMobileRitualId] = useState<string | null>(null);
+
+  // State for Concierge Reservation Suite
+  const [appointmentType, setAppointmentType] = useState<"Full Ritual Reservation" | "15-Min Private Diagnostic Consultation">(
+    "Full Ritual Reservation"
+  );
+  const [reservationTier, setReservationTier] = useState<string>("Artistic Director");
+  const [selectedRitualName, setSelectedRitualName] = useState<string>(RITUALS[0].name);
+  const [preferredDate, setPreferredDate] = useState<string>("");
+  const [preferredTimeWindow, setPreferredTimeWindow] = useState<string>("Afternoon Atelier (1:00 PM – 5:00 PM)");
+  const [clientName, setClientName] = useState<string>("");
+  const [clientPhone, setClientPhone] = useState<string>("");
+  const [clientNotes, setClientNotes] = useState<string>("");
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+
+  const conciergeRef = useRef<HTMLDivElement>(null);
+
+  // Filter Rituals
+  const filteredRituals =
+    activeCategory === "all" ? RITUALS : RITUALS.filter((r) => r.category === activeCategory);
+
+  // Trigger booking from ritual row
+  const handleReserveRitual = (ritual: RitualItem) => {
+    setSelectedRitualName(ritual.name);
+    setReservationTier(stylistTier);
+    setAppointmentType("Full Ritual Reservation");
+    conciergeRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Trigger booking from Artistic Director card
+  const handleRequestDirector = (directorName: string, tier: string) => {
+    setReservationTier(tier);
+    setClientNotes(`Preferred Specialist requested: ${directorName}.`);
+    conciergeRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  };
+
+  // Generate WhatsApp Direct Pre-filled Link
+  const whatsAppMessage = encodeURIComponent(
+    `Hello Urbanity Salon Concierge,\n\nI would like to request a private reservation:\n` +
+      `• Type: ${appointmentType}\n` +
+      `• Tier: ${reservationTier}\n` +
+      `• Ritual: ${selectedRitualName}\n` +
+      `• Date: ${preferredDate || "Earliest Available"}\n` +
+      `• Window: ${preferredTimeWindow}\n` +
+      `• Client Name: ${clientName || "Valued Client"}\n` +
+      `• Phone: ${clientPhone || "Provided on arrival"}\n` +
+      (clientNotes ? `• Notes: ${clientNotes}\n` : "") +
+      `\nPlease confirm availability at your Tilkamanjhi salon.`
+  );
+
   return (
-    <main>
-      {/* Hero Section */}
-      <header className="relative w-full h-screen flex items-center overflow-hidden">
-        <motion.div 
-          className="absolute inset-0 z-0"
-          initial={{ scale: 1.08, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 2, ease: [0.25, 0.46, 0.45, 0.94] }}
-        >
-          <Image 
-            src="https://i.ibb.co/dwfWDqpj/Chat-GPT-Image-Apr-28-2026-12-58-09-AM.png" 
-            alt="Premium salon interior with luxurious ambiance" 
+    <main className="w-full bg-[#131313] text-[#e5e2e1] overflow-hidden selection:bg-[#c9a84c] selection:text-[#080808]">
+      {/* ============================================================ */}
+      {/* 1. EDITORIAL ATELIER HERO (MINIMALIST LUXURY BACKGROUND)     */}
+      {/* ============================================================ */}
+      <section className="relative min-h-[92vh] lg:min-h-screen flex items-center pt-28 pb-16 lg:py-28 px-6 md:px-12 overflow-hidden bg-[#131313] border-b border-[#c9a84c]/20">
+        {/* Full-Bleed Editorial Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-bg.jpg"
+            alt="Urbanity Atelier Beauty Sanctuary"
             fill
-            className="object-cover" 
-            referrerPolicy="no-referrer"
             priority
+            className="object-cover object-[75%_center] sm:object-[80%_center] lg:object-right filter brightness-[0.88] contrast-[1.04]"
           />
-          {/* Enhanced gradient overlays for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-[#131313]/40 to-[#131313]/70"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#131313]/90 via-[#131313]/20 to-[#131313]/60"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_30%,_#131313_100%)] opacity-40"></div>
-        </motion.div>
+        </div>
 
-        {/* Location Badge — Bhagalpur Premium Positioning */}
-        <motion.div 
-          className="absolute top-32 left-12 z-20 hidden md:flex items-center gap-2.5 bg-white/5 backdrop-blur-md border border-white/10 px-5 py-2.5 rounded-full"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <span className="material-symbols-outlined text-primary text-base icon-filled">location_on</span>
-          <span className="font-cta-label text-[10px] text-on-surface tracking-[0.2em] uppercase">Bhagalpur&apos;s Premium Salon Experience</span>
-        </motion.div>
+        {/* Seamless Multi-Layer Section Blending Overlays */}
+        {/* 1. Left-to-Right Obsidian Velvet Vignette: Ensures 100% Text Legibility on Left & Glows Model on Right */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#131313] via-[#131313]/92 sm:via-[#131313]/80 lg:via-[#131313]/40 to-transparent pointer-events-none" />
 
-        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-12 flex flex-col items-center md:items-start gap-8">
-          <motion.div 
-            className="flex flex-col gap-5 max-w-2xl text-center md:text-left"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-          >
-            <span className="font-section-head text-section-head text-primary tracking-[0.3em] uppercase">URBANITY SALON &amp; LOUNGE</span>
-            <h1 className="font-h1-editorial text-h1-editorial text-on-background leading-tight">
-              Redefine Your <br/>
-              <span className="italic text-primary">Elegance</span>
-            </h1>
-            <p className="font-body-main text-body-main text-on-surface-variant max-w-lg mt-2 font-light leading-relaxed">
-              Trusted by 2,500+ clients — experience artistry, precision, and luxury that elevates your natural beauty. Every visit, a masterpiece.
-            </p>
-          </motion.div>
+        {/* 2. Top Header Transition Blend */}
+        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#131313] via-[#131313]/70 to-transparent z-[1] pointer-events-none" />
 
-          <motion.div 
-            className="flex flex-col sm:flex-row items-center sm:items-start gap-5 w-full sm:w-auto"
+        {/* 3. Bottom Seamless Blend into Continuous Luxury Runway Ticker */}
+        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#0e0e0e] via-[#131313]/80 to-transparent z-[1] pointer-events-none" />
+
+        {/* 4. Ambient Champagne-Gold Warmth Overlay */}
+        <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_20%_40%,rgba(201,168,76,0.1)_0%,transparent_60%)] pointer-events-none" />
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-[radial-gradient(circle,rgba(230,195,100,0.08)_0%,transparent_70%)] z-[1] pointer-events-none" />
+
+        <div className="relative z-10 w-full max-w-[1380px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Typographic Editorial Narrative & Micro-Highlights */}
+          <motion.div
+            className="lg:col-span-7 flex flex-col gap-6 md:gap-7 text-left"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="flex flex-col items-center sm:items-start gap-2">
-              <Link href="/contact" className="bg-primary text-on-primary font-cta-label text-cta-label px-10 py-5 rounded-DEFAULT shimmer-btn cta-glow tracking-[0.15em] w-full sm:w-auto text-center inline-block">
-                Book Appointment
+            {/* Micro-Overline Tracker */}
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-[1px] bg-[#e6c364]" />
+              <span className="font-sans text-[11px] md:text-xs tracking-[0.24em] text-[#e6c364] uppercase font-semibold">
+                URBANITY • BESPOKE HAIR ARCHITECTURE
+              </span>
+            </div>
+
+            {/* Cormorant Garamond Display Headline */}
+            <h1 className="font-display text-[46px] sm:text-[62px] md:text-[74px] lg:text-[84px] leading-[0.94] text-[#e5e2e1] tracking-[-0.02em] font-light drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+              Unleash Your <br />
+              <span className="italic font-normal text-[#e6c364]">Inner Radiance.</span>
+            </h1>
+
+            {/* Concise Editorial Subcopy */}
+            <p className="font-sans text-sm md:text-base text-[#d0c5b2] max-w-xl font-light leading-relaxed drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)]">
+              Bhagalpur&apos;s sanctuary for cranial silhouette architecture, French dimensional balayage, and clinical scalp trichology—tailored unhurriedly to your unique presence.
+            </p>
+
+            {/* Dual Pill Action CTAs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
+              <Link
+                href="#concierge-booking"
+                className="inline-flex items-center justify-center font-sans text-xs tracking-[0.16em] uppercase bg-[#e6c364] text-[#131313] px-8 py-3.5 rounded-full font-bold hover:bg-[#ffe08f] transition-all duration-300 shadow-[0_4px_22px_rgba(230,195,100,0.28)] hover:scale-[1.02]"
+              >
+                RESERVE CONSULTATION
               </Link>
-              <span className="urgency-label font-body-main">Limited Slots Available Today</span>
+              <Link
+                href="#ritual-menu"
+                className="inline-flex items-center justify-center font-sans text-xs tracking-[0.16em] uppercase border border-[#c9a84c]/60 text-[#e5e2e1] hover:border-[#e6c364] hover:text-[#e6c364] px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-[#c9a84c]/15 backdrop-blur-sm"
+              >
+                EXPLORE RITUALS →
+              </Link>
             </div>
-            <Link href="/services" className="text-on-surface-variant font-cta-label text-cta-label px-6 py-5 hover:text-primary transition-colors w-full sm:w-auto text-center tracking-[0.15em] inline-flex items-center justify-center gap-2 group">
-              View Services <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_right_alt</span>
-            </Link>
-          </motion.div>
-          
-          <motion.div 
-            className="flex flex-wrap gap-4 mt-2 w-full sm:w-auto opacity-80"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.8 }}
-            transition={{ duration: 1, delay: 1 }}
-          >
-            <Link href="/bridal" className="border border-white/15 text-on-surface-variant font-cta-label text-[10px] px-6 py-3 rounded-DEFAULT hover:border-primary hover:text-primary transition-all uppercase tracking-[0.15em] flex-1 sm:flex-none text-center inline-block">
-              Bridal Studio
-            </Link>
-            <Link href="/gallery" className="border border-white/15 text-on-surface-variant font-cta-label text-[10px] px-6 py-3 rounded-DEFAULT hover:border-primary hover:text-primary transition-all uppercase tracking-[0.15em] flex-1 sm:flex-none text-center inline-block">
-              Gallery
-            </Link>
-            <Link href="/about" className="border border-white/15 text-on-surface-variant font-cta-label text-[10px] px-6 py-3 rounded-DEFAULT hover:border-primary hover:text-primary transition-all uppercase tracking-[0.15em] flex-1 sm:flex-none text-center inline-block">
-              Our Story
-            </Link>
-          </motion.div>
-        </div>
 
-        {/* Rating Strip — Enhanced Trust Signal */}
-        <motion.div 
-          className="absolute bottom-10 left-0 w-full z-20 hidden md:block"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-        >
-          <div className="max-w-[1280px] mx-auto px-12">
-            <div className="flex items-center gap-6 py-4 border-t border-white/10">
-              <div className="flex -space-x-3">
-                <Image src="https://lh3.googleusercontent.com/aida-public/AB6AXuCERiM8Tev2_qA3S7n6EeXkT0Dq5t4qBgtgsV0KBOjPI6_D8u-SX9-5zFIzeY2JvfulM11NmKt4nFihBf5awB2KeA-9yTfzQOhb91S6sPoEpLQ8W4Bib4lE5gu_ZsO-fZ0KCpR1FiLT_HVwdzEAbU4O9xcee-SIZXKrQALKQdJpHMDPv-A906-zras0-DHT9Sps-icyBik3_idFPX-fuaZ12Z77rnCkEw9fFNsmMoQwvtolTQJTcRhG4hg3_BFve-hbyT-GmJJfd5gC" alt="user" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-[#131313] object-cover" referrerPolicy="no-referrer" />
-                <Image src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzyhOmsm-QTvRK0r0qKbnhy4gG67KFAa1vGp_pl5UHA-4h1rkYRknwBpfGYWG6XnfK8h_T33kfnq1KwuYnOYiwfPGuApgC-718SNEx7WK-p73Ao5F8ORrhPiFuLAdYHAt78LcJb9i27BGNOLqTeWoomSY9wQZ91hzIV5OmB4fIlrq1PfH5cVa19yBiZkpH4PGqI6DbEEz4VI3Yrx1DBFpwI82jVBQX3NoU5b0lW5h8IiD6O6rZauldslFJdGiLZexjuqzUnxMttqLw" alt="user" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-[#131313] object-cover" referrerPolicy="no-referrer" />
-                <Image src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbi5uiG7xzbuU1t1QJ7i2bpa4_wpe51ZvvmJWLkaDUaMxZO999t6VTJHgQb_HTRhBfRQnRv2nqRT89PuwqzmAuxp_1t_TyKY1KKzZIH08lW1saFCbxTfgI8zNg7XKmIqPtd-69UPJypdMJ0qDRFdQWSPkaWv_W4pv1ukVpArXTNfDzb-HyLLZg7fxBtr5S_hakat2vrV4-XvZnkmQvJSKq7bbnehSEVhxKsjDWUHKofYU-0eqwMjg4B-LS_7Y33j0GD9N7jUbMr4bA" alt="user" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-[#131313] object-cover" referrerPolicy="no-referrer" />
+            {/* 3 Horizontal Micro-Feature Highlights (Matching Reference) */}
+            <div className="pt-6 border-t border-[#c9a84c]/20 grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="flex flex-col gap-1.5">
+                <span className="material-symbols-outlined text-2xl text-[#e6c364]">psychology</span>
+                <span className="font-sans text-xs font-semibold uppercase tracking-wider text-[#e5e2e1]">
+                  Diagnostic Precision
+                </span>
+                <p className="font-sans text-[11px] text-[#d0c5b2]/85 leading-normal">
+                  Cranial balance analysis &amp; facial silhouette mapping.
+                </p>
               </div>
+
+              <div className="flex flex-col gap-1.5">
+                <span className="material-symbols-outlined text-2xl text-[#e6c364]">schedule</span>
+                <span className="font-sans text-xs font-semibold uppercase tracking-wider text-[#e5e2e1]">
+                  Unhurried Sanctuary
+                </span>
+                <p className="font-sans text-[11px] text-[#d0c5b2]/85 leading-normal">
+                  Exclusive 1-on-1 master stylist sessions with zero rush.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <span className="material-symbols-outlined text-2xl text-[#e6c364]">eco</span>
+                <span className="font-sans text-xs font-semibold uppercase tracking-wider text-[#e5e2e1]">
+                  Botanical Actives
+                </span>
+                <p className="font-sans text-[11px] text-[#d0c5b2]/85 leading-normal">
+                  Formaldehyde-free keratin &amp; bio-peptide bond integrity.
+                </p>
+              </div>
+            </div>
+
+            {/* Social & Coordinates Micro-Bar */}
+            <div className="pt-2 flex flex-wrap items-center justify-between gap-4 text-[11px] font-sans text-[#d0c5b2]/80 tracking-widest uppercase">
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-0.5 star-pulse">
-                  <span className="material-symbols-outlined text-primary text-sm icon-filled">star</span>
-                  <span className="material-symbols-outlined text-primary text-sm icon-filled">star</span>
-                  <span className="material-symbols-outlined text-primary text-sm icon-filled">star</span>
-                  <span className="material-symbols-outlined text-primary text-sm icon-filled">star</span>
-                  <span className="material-symbols-outlined text-primary text-sm icon-filled">star</span>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#e6c364] transition-colors"
+                >
+                  INSTAGRAM
+                </a>
+                <span>•</span>
+                <a
+                  href="https://wa.me/918578060606"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#e6c364] transition-colors"
+                >
+                  WHATSAPP
+                </a>
+                <span>•</span>
+                <a href="tel:+918578060606" className="hover:text-[#e6c364] transition-colors">
+                  +91 8578060606
+                </a>
+              </div>
+              <div className="flex items-center gap-1.5 text-[#e6c364]">
+                <span className="material-symbols-outlined text-sm">location_on</span>
+                <span>TILKAMANJHI, BHAGALPUR</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Breathing Space for Luminous Portrait & Minimalist Curatorial Badge */}
+          <div className="hidden lg:flex lg:col-span-5 h-full min-h-[480px] flex-col justify-end items-end pb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="flex items-center gap-2.5 px-4 py-2 bg-[#131313]/70 backdrop-blur-md border border-[#c9a84c]/25 rounded-full text-[10px] font-sans tracking-[0.22em] text-[#e6c364] uppercase shadow-[0_8px_24px_rgba(0,0,0,0.4)]"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#e6c364] animate-pulse" />
+              <span>EDITORIAL ATELIER EDITION</span>
+              <span className="text-[#d0c5b2]/40">•</span>
+              <span className="text-[#e5e2e1]">AW26</span>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 1.5. LUXURY CONTINUOUS RUNWAY TICKER                        */}
+      {/* ============================================================ */}
+      <div className="relative w-full overflow-hidden border-y border-[#c9a84c]/20 bg-[#0e0e0e] py-3.5 select-none">
+        <div className="animate-marquee flex items-center gap-8 whitespace-nowrap font-sans text-[11px] md:text-xs tracking-[0.24em] text-[#d0c5b2] uppercase">
+          {[...Array(2)].map((_, i) => (
+            <div key={i} className="flex items-center gap-8">
+              <span className="text-[#e5e2e1] font-medium">PRECISION CRANIAL ARCHITECTURE</span>
+              <span className="text-[#e6c364]">•</span>
+              <span>FRENCH DIMENSIONAL BALAYAGE</span>
+              <span className="text-[#e6c364]">•</span>
+              <span className="text-[#e5e2e1] font-medium">CELLULAR SCALP TRICHOLOGY</span>
+              <span className="text-[#e6c364]">•</span>
+              <span>BRIDAL PRIVÉ COUTURE</span>
+              <span className="text-[#e6c364]">•</span>
+              <span className="text-[#e5e2e1] font-medium">FORMALDEHYDE-FREE BIO-KERATIN</span>
+              <span className="text-[#e6c364]">•</span>
+              <span>UNHURRIED BESPOKE CONSULTATION</span>
+              <span className="text-[#e6c364]">•</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ============================================================ */}
+      {/* 2. THE ATELIER PHILOSOPHY                                   */}
+      {/* ============================================================ */}
+      <section
+        id="the-atelier"
+        className="w-full bg-[#181818] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+      >
+        <div className="max-w-[1380px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Left 4 Columns: Section Index & Formulation Badges */}
+          <div className="lg:col-span-4 flex flex-col justify-between">
+            <div className="sticky top-28 space-y-6">
+              <div>
+                <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+                  02 / OUR PHILOSOPHY
+                </span>
+                <h2 className="font-display text-3xl md:text-4xl text-[#e5e2e1] font-light leading-tight">
+                  Quiet Craft, <br />
+                  <span className="italic text-[#e6c364]">Zero Compromise.</span>
+                </h2>
+              </div>
+
+              {/* Formulation Badges */}
+              <div className="space-y-4 pt-4 border-t border-[#c9a84c]/20">
+                <div className="flex items-start gap-3 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                  <span className="material-symbols-outlined text-lg text-[#e6c364] mt-0.5">spa</span>
+                  <div>
+                    <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                      Bio-Identical Keratin
+                    </h4>
+                    <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                      100% Formaldehyde-Free restorative amino acids.
+                    </p>
+                  </div>
                 </div>
-                <span className="text-[11px] text-on-surface-variant font-cta-label tracking-[0.15em] uppercase">4.9/5 Rating</span>
-                <span className="text-on-surface-variant/30">•</span>
-                <span className="text-[11px] text-on-surface-variant font-cta-label tracking-[0.15em] uppercase">2,500+ Happy Clients</span>
+
+                <div className="flex items-start gap-3 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                  <span className="material-symbols-outlined text-lg text-[#e6c364] mt-0.5">science</span>
+                  <div>
+                    <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                      Micro-Pigment Balayage
+                    </h4>
+                    <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                      Ammonia-free French lighteners protecting fiber integrity.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                  <span className="material-symbols-outlined text-lg text-[#e6c364] mt-0.5">chair</span>
+                  <div>
+                    <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                      Unhurried Sanctuary
+                    </h4>
+                    <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                      1-on-1 private chairs with dedicated acoustic comfort.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </motion.div>
-      </header>
 
-      {/* The Atelier Shop */}
-      <section className="py-section-padding px-6">
-        <motion.div 
-          className="max-w-container-max mx-auto"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <div className="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-stack-md">
-            <div className="max-w-lg">
-              <span className="font-section-head text-section-head text-primary block mb-stack-sm uppercase">Curated Collection</span>
-              <h2 className="font-h2-editorial text-h2-editorial text-on-background">The Atelier Shop</h2>
+          {/* Right 8 Columns: Pull-Quote Statement & 3 Pillars */}
+          <div className="lg:col-span-8 flex flex-col gap-12">
+            <blockquote className="border-l-2 border-[#c9a84c] pl-6 md:pl-8 py-2">
+              <p className="font-display text-2xl md:text-3xl lg:text-4xl text-[#e5e2e1] font-light leading-snug">
+                “We do not merely cut or color hair; we decode facial architecture and craft a living silhouette that
+                reframes how you carry yourself through the world.”
+              </p>
+              <footer className="mt-4 font-sans text-xs tracking-[0.2em] text-[#e6c364] uppercase font-semibold">
+                — Kiran Kishore, Founder &amp; Creative Director
+              </footer>
+            </blockquote>
+
+            {/* 3 Pillars Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6 border-t border-[#c9a84c]/20">
+              <div className="flex flex-col gap-3 p-6 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-xs text-[#e6c364] font-semibold">01 / DIAGNOSTIC</span>
+                <h3 className="font-display text-xl text-[#e5e2e1] font-normal">Cranial Precision</h3>
+                <p className="font-sans text-xs md:text-sm text-[#d0c5b2] leading-relaxed">
+                  Every ritual begins with cranial bone structure mapping and fiber elasticity testing before any tool
+                  touches hair.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3 p-6 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-xs text-[#e6c364] font-semibold">02 / FORMULATION</span>
+                <h3 className="font-display text-xl text-[#e5e2e1] font-normal">Artisanal Blends</h3>
+                <p className="font-sans text-xs md:text-sm text-[#d0c5b2] leading-relaxed">
+                  Botanical elixirs and bond-multiplying peptides freshly combined at your chair to seal cuticle light-refraction.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3 p-6 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-xs text-[#e6c364] font-semibold">03 / PRIVÉ SANCTUARY</span>
+                <h3 className="font-display text-xl text-[#e5e2e1] font-normal">Discrete Pacing</h3>
+                <p className="font-sans text-xs md:text-sm text-[#d0c5b2] leading-relaxed">
+                  No overlapping appointments, no chaotic salon noise. Hand-crafted herbal teas and focused artistic
+                  immersion.
+                </p>
+              </div>
             </div>
-            <Link href="/services" className="font-cta-label text-cta-label text-primary hover:text-primary-fixed transition-colors flex items-center gap-2 uppercase">
-              Explore Full Range <span className="material-symbols-outlined text-sm">arrow_right_alt</span>
-            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 3. SLEEK MINIMALIST RITUAL MENU                              */}
+      {/* ============================================================ */}
+      <section
+        id="ritual-menu"
+        className="w-full bg-[#0e0e0e] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+      >
+        <div className="max-w-[1380px] mx-auto">
+          {/* Menu Header with Category Tabs & Stylist Tier Selector */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-[#c9a84c]/20">
+            <div>
+              <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+                03 / THE RITUAL DIRECTORY
+              </span>
+              <h2 className="font-display text-3xl md:text-5xl text-[#e5e2e1] font-light">
+                Bespoke Services &amp; <span className="italic text-[#e6c364]">Sensory Rituals</span>
+              </h2>
+            </div>
+
+            {/* Stylist Tier Segmented Selector */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <span className="font-sans text-[10px] tracking-[0.2em] text-[#d0c5b2] uppercase">
+                STYLIST TIER:
+              </span>
+              <div className="inline-flex bg-[#1c1b1b] p-1 border border-[#c9a84c]/30 rounded-[2px]">
+                <button
+                  onClick={() => setStylistTier("Senior Stylist")}
+                  className={`font-sans text-[10px] md:text-[11px] tracking-[0.16em] uppercase px-4 py-2 transition-all rounded-[2px] ${
+                    stylistTier === "Senior Stylist"
+                      ? "bg-[#c9a84c] text-[#080808] font-bold shadow-sm"
+                      : "text-[#d0c5b2] hover:text-[#e5e2e1]"
+                  }`}
+                >
+                  SENIOR STYLIST
+                </button>
+                <button
+                  onClick={() => setStylistTier("Artistic Director")}
+                  className={`font-sans text-[10px] md:text-[11px] tracking-[0.16em] uppercase px-4 py-2 transition-all rounded-[2px] ${
+                    stylistTier === "Artistic Director"
+                      ? "bg-[#c9a84c] text-[#080808] font-bold shadow-sm"
+                      : "text-[#d0c5b2] hover:text-[#e5e2e1]"
+                  }`}
+                >
+                  ARTISTIC DIRECTOR
+                </button>
+              </div>
+            </div>
           </div>
 
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-12 gap-gutter"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={{
-              visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-              hidden: { opacity: 0 }
-            }}
-          >
-            {/* Featured Product (Spans 8 cols) */}
-            <motion.article 
-              className="md:col-span-8 group relative bg-surface-container-low rounded-lg overflow-hidden card-glow-hover transition-all duration-500 h-[500px]"
-              variants={{
-                hidden: { opacity: 0, scale: 0.95 },
-                visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
-              }}
-            >
-              <Image 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvU3Bj8k_u9yzYse3MSMm1u49F1s-T8UgdtmzfJy9d2Vsv4mr55Ky1gB04Wq9Cz8tf40su-slxGzo6kNxogcMSe1BlaRLscoktNwWR6sJGe-DOi7t_VmM9I84dKT8WqcyPoHVoV11FSCcM3_2FRO0WTgWM8Jfx37DLor-rcBrhfo0Evow49FbG-0aVvES2zKsxg2vB3C7rvdEm7oteM4mFTlew8HkCAzzQL7sEIeb7OfnNyxco5kfm8W6iB0RanvulPMvumSXL2Bwo" 
-                alt="Featured premium hair oil" 
+          {/* Category Filter Pills */}
+          <div className="flex items-center gap-2 md:gap-3 overflow-x-auto py-6 border-b border-[#c9a84c]/15 hide-scrollbar">
+            {[
+              { id: "all", label: "ALL RITUALS" },
+              { id: "cuts", label: "COUTURE CUTS" },
+              { id: "color", label: "FRENCH BALAYAGE & COLOR" },
+              { id: "keratin", label: "KERATIN & TRICHOLOGY" },
+              { id: "skin", label: "AESTHETICS & NAILS" },
+              { id: "bridal", label: "BRIDAL PRIVÉ" },
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`whitespace-nowrap font-sans text-[10px] md:text-[11px] tracking-[0.18em] uppercase px-4 py-2 rounded-[2px] transition-all border ${
+                  activeCategory === cat.id
+                    ? "border-[#c9a84c] text-[#080808] bg-[#c9a84c] font-bold"
+                    : "border-transparent text-[#d0c5b2] hover:text-[#e5e2e1] hover:border-[#c9a84c]/30"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* 12-Column Layout: 8 cols Ritual Rows + 4 cols Sticky Preview (Desktop) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-8 items-start">
+            {/* Left 8 Columns: Horizontal 1px-Bordered Ritual Rows */}
+            <div className="lg:col-span-8 divide-y divide-[#c9a84c]/20">
+              {filteredRituals.map((ritual) => {
+                const isHovered = hoveredRitual.id === ritual.id;
+                const isExpandedMobile = expandedMobileRitualId === ritual.id;
+                const activePrice = stylistTier === "Senior Stylist" ? ritual.seniorPrice : ritual.directorPrice;
+
+                return (
+                  <div
+                    key={ritual.id}
+                    onMouseEnter={() => setHoveredRitual(ritual)}
+                    onFocus={() => setHoveredRitual(ritual)}
+                    className={`group py-6 md:py-8 transition-luxury relative cursor-pointer ${
+                      isHovered ? "bg-[#1c1b1b]/70 px-4 -mx-4 rounded-[2px]" : ""
+                    }`}
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      {/* Ritual Name & Sensory Metadata */}
+                      <div className="flex-1 pr-4">
+                        <div className="flex items-center gap-3 mb-1.5">
+                          <span className="font-mono text-[10px] text-[#e6c364] tracking-widest uppercase">
+                            {ritual.duration}
+                          </span>
+                          <span className="text-[#c9a84c]/40">•</span>
+                          <span className="font-sans text-[10px] text-[#d0c5b2] tracking-widest uppercase">
+                            {ritual.category}
+                          </span>
+                        </div>
+                        <h3 className="font-display text-xl md:text-2xl text-[#e5e2e1] group-hover:text-[#e6c364] transition-colors font-normal">
+                          {ritual.name}
+                        </h3>
+                        <p className="font-sans text-xs text-[#d0c5b2] mt-2 font-light leading-relaxed max-w-xl">
+                          {ritual.formulation}
+                        </p>
+                      </div>
+
+                      {/* Tiered Price & Action Trigger */}
+                      <div className="flex items-center justify-between md:justify-end gap-6 pt-3 md:pt-0 border-t md:border-t-0 border-[#c9a84c]/15">
+                        <div className="text-left md:text-right">
+                          <span className="font-sans text-[9px] text-[#d0c5b2] uppercase tracking-wider block">
+                            {stylistTier}
+                          </span>
+                          <span className="font-mono text-xl md:text-2xl text-[#e6c364] font-medium tabular-numbers">
+                            {activePrice}
+                          </span>
+                        </div>
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleReserveRitual(ritual);
+                          }}
+                          className="font-sans text-[10px] tracking-[0.2em] uppercase bg-transparent text-[#e5e2e1] border border-[#c9a84c]/40 group-hover:border-[#e6c364] group-hover:bg-[#c9a84c] group-hover:text-[#080808] px-4 py-2.5 rounded-[2px] transition-all whitespace-nowrap font-medium"
+                        >
+                          RESERVE RITUAL →
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Mobile Touch Accordion */}
+                    <div className="lg:hidden mt-4 pt-4 border-t border-[#c9a84c]/15 flex flex-col gap-3">
+                      <button
+                        onClick={() =>
+                          setExpandedMobileRitualId(isExpandedMobile ? null : ritual.id)
+                        }
+                        className="text-left font-sans text-[10px] tracking-widest text-[#e6c364] uppercase flex items-center justify-between"
+                      >
+                        <span>{isExpandedMobile ? "Hide Formulation Notes" : "View Look & Botanical Notes"}</span>
+                        <span className="material-symbols-outlined text-xs">
+                          {isExpandedMobile ? "expand_less" : "expand_more"}
+                        </span>
+                      </button>
+
+                      {isExpandedMobile && (
+                        <div className="mt-2 space-y-3">
+                          <div className="relative w-full aspect-[16/9] rounded-[2px] overflow-hidden border border-[#c9a84c]/20">
+                            <Image
+                              src={ritual.image}
+                              alt={ritual.name}
+                              fill
+                              className="object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <ul className="text-xs text-[#d0c5b2] space-y-1">
+                            {ritual.benefits.map((b, i) => (
+                              <li key={i} className="flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#e6c364]" />
+                                <span>{b}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Right 4 Columns: Desktop Sticky Editorial Preview Panel */}
+            <div className="hidden lg:block lg:col-span-4 sticky top-28">
+              <div className="bg-[#1c1b1b] border border-[#c9a84c]/25 rounded-[2px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+                <div className="flex justify-between items-center text-[10px] tracking-[0.2em] font-sans text-[#e6c364] uppercase border-b border-[#c9a84c]/20 pb-3 mb-4 font-semibold">
+                  <span>ATELIER LOOK PREVIEW</span>
+                  <span className="font-mono">{stylistTier.toUpperCase()}</span>
+                </div>
+
+                <div className="relative aspect-[3/4] w-full rounded-[2px] overflow-hidden border border-[#c9a84c]/20 mb-4">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={hoveredRitual.id}
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.02 }}
+                      transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={hoveredRitual.image}
+                        alt={hoveredRitual.name}
+                        fill
+                        className="object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <span className="font-mono text-[10px] text-[#e6c364] uppercase tracking-widest block font-medium">
+                          SIGNATURE ARCHITECTURE
+                        </span>
+                        <p className="font-display text-lg text-[#e5e2e1] font-normal leading-tight mt-0.5">
+                          {hoveredRitual.name}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Formulation Notes & Benefits */}
+                <div className="space-y-3">
+                  <p className="font-sans text-xs text-[#d0c5b2] font-light leading-relaxed italic">
+                    &quot;{hoveredRitual.caption}&quot;
+                  </p>
+                  <div className="border-t border-[#c9a84c]/15 pt-3">
+                    <span className="font-sans text-[9px] tracking-[0.2em] text-[#e6c364] uppercase block mb-2 font-semibold">
+                      KEY CLINICAL BENEFITS
+                    </span>
+                    <ul className="space-y-1.5">
+                      {hoveredRitual.benefits.map((b, i) => (
+                        <li key={i} className="flex items-center gap-2 text-xs text-[#d0c5b2] font-sans">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#e6c364]" />
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      onClick={() => handleReserveRitual(hoveredRitual)}
+                      className="w-full text-center py-3 bg-[#c9a84c] text-[#080808] font-sans text-xs uppercase tracking-[0.18em] font-bold rounded-[2px] hover:bg-[#ffe08f] transition-colors"
+                    >
+                      RESERVE THIS RITUAL
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 4. ARTISTIC DIRECTORS & SPECIALISTS                         */}
+      {/* ============================================================ */}
+      <section
+        id="directors"
+        className="w-full bg-[#131313] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+      >
+        <div className="max-w-[1380px] mx-auto">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#c9a84c]/20">
+            <div className="max-w-2xl">
+              <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+                04 / MASTER CRAFTSPEOPLE
+              </span>
+              <h2 className="font-display text-3xl md:text-5xl text-[#e5e2e1] font-light">
+                Artistic Directors &amp; <span className="italic text-[#e6c364]">Specialists</span>
+              </h2>
+            </div>
+            <p className="font-sans text-xs md:text-sm text-[#d0c5b2] max-w-md font-light leading-relaxed">
+              Guided by international cutting geometry, French dimensional balayage, and clinical scalp trichology.
+            </p>
+          </div>
+
+          {/* 3-Column 3:4 Tall Portrait Gallery */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mt-12">
+            {/* Director 1: Kiran Kishore */}
+            <div className="group flex flex-col bg-[#1c1b1b] border border-[#c9a84c]/20 rounded-[2px] overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#131313]">
+                <Image
+                  src="https://www.image2url.com/r2/default/images/1777307279699-b39c8f5c-f80f-4dbf-a53f-bf76c40ec46f.png"
+                  alt="Kiran Kishore - Founder and Creative Director"
+                  fill
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-[#e5e2e1]">
+                  <span className="font-mono text-[10px] tracking-widest text-[#e6c364] uppercase font-medium">
+                    ATELIER FOUNDER
+                  </span>
+                  <h3 className="font-display text-2xl text-[#e5e2e1]">Kiran Kishore</h3>
+                </div>
+              </div>
+
+              <div className="p-6 flex flex-col justify-between flex-1 gap-4">
+                <div>
+                  <span className="font-sans text-[10px] tracking-[0.18em] text-[#e6c364] uppercase block mb-1 font-semibold">
+                    CREATIVE DIRECTION &amp; ARCHITECTURAL CUTS
+                  </span>
+                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed font-light">
+                    12+ years perfecting cranial silhouette geometry, dry-cutting techniques, and bespoke transformations.
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleRequestDirector("Kiran Kishore", "Artistic Director")}
+                  className="font-sans text-[10px] tracking-[0.2em] uppercase border border-[#c9a84c] text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] py-3 text-center transition-all rounded-[2px] font-medium"
+                >
+                  REQUEST DIRECTOR KIRAN →
+                </button>
+              </div>
+            </div>
+
+            {/* Director 2: Elena Rostova */}
+            <div className="group flex flex-col bg-[#1c1b1b] border border-[#c9a84c]/20 rounded-[2px] overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#131313]">
+                <Image
+                  src="https://i.ibb.co/DDcytst4/Chat-GPT-Image-Apr-28-2026-04-40-10-AM.png"
+                  alt="Elena Rostova - Senior Colorist & Balayage Director"
+                  fill
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-[#e5e2e1]">
+                  <span className="font-mono text-[10px] tracking-widest text-[#e6c364] uppercase font-medium">
+                    COLOR DIRECTOR
+                  </span>
+                  <h3 className="font-display text-2xl text-[#e5e2e1]">Elena Rostova</h3>
+                </div>
+              </div>
+
+              <div className="p-6 flex flex-col justify-between flex-1 gap-4">
+                <div>
+                  <span className="font-sans text-[10px] tracking-[0.18em] text-[#e6c364] uppercase block mb-1 font-semibold">
+                    FRENCH BALAYAGE &amp; MICRO-FOIL ARCHITECTURE
+                  </span>
+                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed font-light">
+                    European colorimetry specialist dedicated to cool toners, multi-dimensional depths, and zero brassiness.
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleRequestDirector("Elena Rostova", "Senior Stylist")}
+                  className="font-sans text-[10px] tracking-[0.2em] uppercase border border-[#c9a84c] text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] py-3 text-center transition-all rounded-[2px] font-medium"
+                >
+                  REQUEST COLORIST ELENA →
+                </button>
+              </div>
+            </div>
+
+            {/* Director 3: Sophia Chen */}
+            <div className="group flex flex-col bg-[#1c1b1b] border border-[#c9a84c]/20 rounded-[2px] overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#131313]">
+                <Image
+                  src="https://i.ibb.co/LD6jj4DR/Chat-GPT-Image-Apr-28-2026-04-37-05-AM.png"
+                  alt="Sophia Chen - Master Bridal & Aesthetics Specialist"
+                  fill
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-[#e5e2e1]">
+                  <span className="font-mono text-[10px] tracking-widest text-[#e6c364] uppercase font-medium">
+                    BRIDAL PRIVÉ SPECIALIST
+                  </span>
+                  <h3 className="font-display text-2xl text-[#e5e2e1]">Sophia Chen</h3>
+                </div>
+              </div>
+
+              <div className="p-6 flex flex-col justify-between flex-1 gap-4">
+                <div>
+                  <span className="font-sans text-[10px] tracking-[0.18em] text-[#e6c364] uppercase block mb-1 font-semibold">
+                    BRIDAL COUTURE &amp; SCALP TRICHOLOGY
+                  </span>
+                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed font-light">
+                    Celebrated for serene wedding day execution, architectural veil draping, and dewy HD airbrush finishes.
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleRequestDirector("Sophia Chen", "Artistic Director")}
+                  className="font-sans text-[10px] tracking-[0.2em] uppercase border border-[#c9a84c] text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] py-3 text-center transition-all rounded-[2px] font-medium"
+                >
+                  REQUEST SPECIALIST SOPHIA →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 5. BRIDAL COUTURE & PRIVÉ SUITE                             */}
+      {/* ============================================================ */}
+      <section
+        id="bridal-prive"
+        className="w-full bg-[#181818] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+      >
+        <div className="max-w-[1380px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left 6 Columns: High-Arch Editorial Bridal Frame */}
+          <div className="lg:col-span-6 relative">
+            <div className="relative mx-auto max-w-[460px] aspect-[3/4] rounded-arch overflow-hidden border border-[#c9a84c]/35 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+              <Image
+                src="https://i.ibb.co/gLrDP3Y5/Chat-GPT-Image-Apr-28-2026-12-51-11-AM.png"
+                alt="Luxury Bridal Couture at Urbanity Privé Suite"
                 fill
-                className="object-cover group-hover:opacity-80 transition-opacity duration-700 opacity-90" 
+                className="object-cover object-center"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/80 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6 p-4 bg-[#131313]/90 backdrop-blur-md border border-[#c9a84c]/25 rounded-[2px]">
+                <span className="font-sans text-[10px] tracking-[0.22em] text-[#e6c364] uppercase font-semibold block">
+                  SANCTUARY POLICY
+                </span>
+                <p className="font-display text-lg text-[#e5e2e1] font-normal mt-0.5">
+                  Exclusively 1 Bride Per Morning in the Private Privé Lounge
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right 6 Columns: Bespoke Bridal Journey & Dossier CTA */}
+          <div className="lg:col-span-6 flex flex-col gap-8">
+            <div>
+              <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+                05 / BRIDAL PRIVÉ &amp; COUTURE SANCTUARY
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#e5e2e1] font-light leading-tight">
+                Your Most Sacred Morning, <br />
+                <span className="italic text-[#e6c364]">Curated Without Rush.</span>
+              </h2>
+            </div>
+
+            <p className="font-sans text-xs md:text-sm text-[#d0c5b2] leading-relaxed font-light">
+              We reserve our entire private lounge exclusively for you and your entourage. A phased journey ensuring skin
+              clarity, customized hair fiber resilience, and seamless veil harmony.
+            </p>
+
+            {/* 4-Phase Bridal Timeline */}
+            <div className="space-y-4 pt-2 border-t border-[#c9a84c]/20">
+              <div className="flex items-start gap-4 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-xs text-[#e6c364] font-semibold mt-0.5">01</span>
                 <div>
-                  <h3 className="font-h2-editorial text-3xl text-on-background mb-2">Noir Elixir</h3>
-                  <p className="font-body-main text-sm text-on-surface-variant max-w-sm">Signature restorative hair oil crafted with rare botanicals and infused with liquid amber.</p>
+                  <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                    Diagnostic &amp; Face Mapping (8–12 Weeks Prior)
+                  </h4>
+                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                    Jewelry matching, neckline analysis, and scalp health preparation regimen.
+                  </p>
                 </div>
-                <Link href="/contact" className="font-cta-label text-cta-label px-6 py-3 border border-primary text-primary hover:bg-primary/10 transition-colors uppercase rounded-DEFAULT whitespace-nowrap inline-block">
-                  Shop — $120
-                </Link>
               </div>
-            </motion.article>
 
-            {/* Secondary Product Stack (Spans 4 cols) */}
-            <div className="md:col-span-4 flex flex-col gap-gutter h-[500px]">
-              <motion.article 
-                className="flex-1 group relative bg-surface-container-low rounded-lg overflow-hidden card-glow-hover transition-all duration-500"
-                variants={{
-                  hidden: { opacity: 0, x: 20 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
-                }}
-              >
-                <Image 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOhFFmKjs7i-Bcgpu8S4vvW9dgAENGpLDCs7f4RSniALCzIWt7d691xorn9MrS8Abd5i1koCc6IoNgGyyQHirrOUT8iapV2Qy8iKwd0ysSbUKWuTi2VnLt2qZwlM1hQKvzVLLUr_irqm2kNGdCe__3XEk9V71V7qDsjDgDFxAekhJ7SibrZRYa-TWfRDioYuLVpLc0iqc4S8S4pXEMY_-5422qpQhQMFDK8We0Q77ybCG7MqBjcv8-6TH7OCaZYBrH0pSBNIrHwfUC" 
-                  alt="Styling Cream" 
-                  fill
-                  className="object-cover  group-hover:opacity-70 transition-opacity duration-700" 
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
-                <div className="absolute bottom-0 left-0 p-6">
-                  <h3 className="font-h2-editorial text-2xl text-on-background mb-1">Matte Clay</h3>
-                  <p className="font-body-main text-xs text-on-surface-variant mb-4">Sculpting finish.</p>
-                  <span className="font-cta-label text-xs text-primary">$45</span>
+              <div className="flex items-start gap-4 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-xs text-[#e6c364] font-semibold mt-0.5">02</span>
+                <div>
+                  <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                    Skin Radiance &amp; Balayage Glaze (4–6 Weeks Prior)
+                  </h4>
+                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                    Hydra-infusion facial series and color toning calibrated for photographic flash.
+                  </p>
                 </div>
-              </motion.article>
-              <motion.article 
-                className="flex-1 group relative bg-surface-container-low rounded-lg overflow-hidden card-glow-hover transition-all duration-500"
-                variants={{
-                  hidden: { opacity: 0, x: 20 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
-                }}
-              >
-                <Image 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpELuncbgZ5k7JfWN9sAL-1uEC_fDC9QjCv8qKA6yHWMMlD809j4_MLCPIX30yXWZEymAt9rTTDk5sTc_b3dTZoWFOAox0PgoycspUZc1fbNEsRkHJWce0889GwrWEpkLMR7v1Y1c7JLGJQWpBHkdJmSLZPGc_Rau2nVCgnQ5_biz2064opiFyAJ_mIam8TiXPeBXrxdTnMFsRWrlOkE1ZBGV2J8YbB-A7cA-fhX3xhVzBTmFfRkNrV05JcmItJdbWR2-AEztv7iuq" 
-                  alt="Botanical Wash" 
-                  fill
-                  className="object-cover opacity-50  group-hover:opacity-70 transition-opacity duration-700" 
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
-                <div className="absolute bottom-0 left-0 p-6">
-                  <h3 className="font-h2-editorial text-2xl text-on-background mb-1">Purifying Wash</h3>
-                  <p className="font-body-main text-xs text-on-surface-variant mb-4">Daily cleanse.</p>
-                  <span className="font-cta-label text-xs text-primary">$60</span>
+              </div>
+
+              <div className="flex items-start gap-4 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-xs text-[#e6c364] font-semibold mt-0.5">03</span>
+                <div>
+                  <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                    Full Atelier Rehearsal &amp; Swatch Trial (2–3 Weeks Prior)
+                  </h4>
+                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                    Complete trial in the private suite with gown swatch, veil placement &amp; photography test.
+                  </p>
                 </div>
-              </motion.article>
+              </div>
+
+              <div className="flex items-start gap-4 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-xs text-[#e6c364] font-semibold mt-0.5">04</span>
+                <div>
+                  <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                    Wedding Day Privé Execution
+                  </h4>
+                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                    Uninterrupted luxury sanctuary, artisanal refreshments, and calm master-team execution.
+                  </p>
+                </div>
+              </div>
             </div>
-          </motion.div>
-        </motion.div>
-      </section>
 
-      {/* The Signature Process */}
-      <section className="py-section-padding px-6 bg-surface-container-lowest relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-        <div className="max-w-container-max mx-auto">
-          <div className="text-center mb-section-padding">
-            <span className="font-section-head text-section-head text-primary block mb-stack-sm uppercase">The Journey</span>
-            <h2 className="font-h2-editorial text-h2-editorial text-on-background">The Signature Process</h2>
-          </div>
-
-          <div className="relative max-w-4xl mx-auto">
-            {/* Vertical Line connecting steps */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/30 to-transparent transform md:-translate-x-1/2 hidden sm:block"></div>
-
-            <div className="space-y-24">
-              {/* Step 1 */}
-              <div className="relative flex flex-col md:flex-row items-center gap-12 group">
-                <div className="md:w-1/2 flex justify-end md:pr-12 w-full text-left md:text-right">
-                  <div>
-                    <span className="font-cta-label text-primary mb-2 block">Phase 01</span>
-                    <h3 className="font-h2-editorial text-3xl text-on-background mb-4">The Consultation</h3>
-                    <p className="font-body-main text-on-surface-variant">An intimate dialogue to decode your personal aesthetic and architectural facial structure before scissors touch hair.</p>
-                  </div>
-                </div>
-                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-3 h-3 bg-primary rounded-full ring-4 ring-background z-10 hidden sm:block shadow-[0_0_15px_rgba(230,195,100,0.5)]"></div>
-                <div className="md:w-1/2 md:pl-12 w-full opacity-50 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="h-64 bg-surface-container-low rounded-lg overflow-hidden relative">
-                    <Image 
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxHASK7qOj12V65qXvlMyYC2iNMWsOLyaAeyE76nk_0nWiicyo38jzuPdcp_LVpylTAd-6pCRCDdzp1f9PIeTcytUwKJrvKEfEUto1a_2H87_loJnGs-OPKnMnK-ot1oZi5KyWyzK-KT6hf3hQWZPc93-x8_rJZEsGvAo6DLLAReWKxvcxS5syQ3kSVW9nDPwABR0tIV2BaJS9t6e9sc4gwcrjWJGFrGtLVBhZea5pCpvIdO5ONw5cxg0VzJfad99ENcv1D5j75Ekv" 
-                      alt="Consultation" 
-                      fill
-                      className="object-cover mix-blend-luminosity" 
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="relative flex flex-col md:flex-row-reverse items-center gap-12 group">
-                <div className="md:w-1/2 flex justify-start md:pl-12 w-full text-left">
-                  <div>
-                    <span className="font-cta-label text-primary mb-2 block">Phase 02</span>
-                    <h3 className="font-h2-editorial text-3xl text-on-background mb-4">The Ritual</h3>
-                    <p className="font-body-main text-on-surface-variant">A sensorial cleansing experience utilizing our bespoke Atelier products, focusing on scalp health and complete relaxation.</p>
-                  </div>
-                </div>
-                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-3 h-3 bg-surface-variant rounded-full ring-4 ring-background z-10 hidden sm:block group-hover:bg-primary transition-colors"></div>
-                <div className="md:w-1/2 md:pr-12 w-full opacity-50 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="h-64 bg-surface-container-low rounded-lg overflow-hidden relative">
-                    <Image 
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1I8pumfzbtkWuIOgX35symE5-SSMgjDOz-SpXP8xaojDqic2kw9ixzrDFm_vN1RJLx9ZHArH6Tj5MD7Snpd4M7TdBcidFaOdkxh9yyyy-HIcusMst3gDXwGWIHJh3NZp2RA-w11IEaAmZ-0Xve-imxhW2MwtuGa2nUJh09JV7UDx5koDIgbBfQmY_xfkCRnN_xolcdtu0plgRMqtwhtT7G5wZ9ov4imebvOiLS9nh0kgdMpc5cO6FsY2yMmwhf7h18baZxLzsHAka" 
-                      alt="The Ritual Wash" 
-                      fill
-                      className="object-cover mix-blend-luminosity" 
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="relative flex flex-col md:flex-row items-center gap-12 group">
-                <div className="md:w-1/2 flex justify-end md:pr-12 w-full text-left md:text-right">
-                  <div>
-                    <span className="font-cta-label text-primary mb-2 block">Phase 03</span>
-                    <h3 className="font-h2-editorial text-3xl text-on-background mb-4">Transformation</h3>
-                    <p className="font-body-main text-on-surface-variant">Precision cutting and structural styling tailored to enhance your natural movement, sealed with a signature finish.</p>
-                  </div>
-                </div>
-                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-3 h-3 bg-surface-variant rounded-full ring-4 ring-background z-10 hidden sm:block group-hover:bg-primary transition-colors"></div>
-                <div className="md:w-1/2 md:pl-12 w-full opacity-50 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="h-64 bg-surface-container-low rounded-lg overflow-hidden relative">
-                    <Image 
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu_lpy4VjhY0AMbKAUYENzJWw_0T7tfIZIK10Vzo5-ZJBOOjT6EtMOeGeSe40J5-k4xZECDV4C9zEpx8YcPIi-4Ov0-IIqDQXhcB_QZKydhyUyQQodhs0hMtMrTcan2i-KdRj6x8DN8Qwe1q96ByQKqA8uzEqXnNfytzGziAaHHelhgP_Dxmqvek1MiU8JYzvp-AyLT5NepWVoG7eA_DzgCaA0X7mRXyYQnFH4XSOwdJXoGQfZI7AmfLJ9o2gBcFeEXk1MJw8shSDP" 
-                      alt="Transformation Haircut" 
-                      fill
-                      className="object-cover mix-blend-luminosity" 
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
-              </div>
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+              <button
+                onClick={() => {
+                  setSelectedRitualName("Bespoke Bridal Couture Day Ritual");
+                  setAppointmentType("Full Ritual Reservation");
+                  setReservationTier("Artistic Director");
+                  conciergeRef.current?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="font-sans text-xs tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-8 py-4 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all text-center shimmer-btn"
+              >
+                REQUEST BRIDAL CONSULTATION
+              </button>
+              <Link
+                href="/bridal"
+                className="font-sans text-xs tracking-[0.18em] uppercase border border-[#c9a84c]/40 text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] px-8 py-4 rounded-[2px] transition-all text-center font-medium"
+              >
+                VIEW BRIDAL DOSSIER →
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Voices of Urbanity (Testimonials) */}
-      <section className="py-section-padding bg-surface-container-lowest">
-        <div className="max-w-container-max mx-auto px-6 text-center md:text-left mb-8 md:mb-0">
-          <span className="font-section-head text-section-head text-primary block uppercase tracking-widest">Voices of Urbanity</span>
+      {/* ============================================================ */}
+      {/* 6. EDITORIAL LOOKBOOK & REFLECTIONS                         */}
+      {/* ============================================================ */}
+      <section
+        id="lookbook"
+        className="w-full bg-[#0e0e0e] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+      >
+        <div className="max-w-[1380px] mx-auto">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#c9a84c]/20">
+            <div>
+              <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+                06 / EDITORIAL LOOKBOOK &amp; ARCHIVE
+              </span>
+              <h2 className="font-display text-3xl md:text-5xl text-[#e5e2e1] font-light">
+                Living Silhouettes &amp; <span className="italic text-[#e6c364]">Reflections</span>
+              </h2>
+            </div>
+            <Link
+              href="/gallery"
+              className="font-sans text-xs tracking-[0.18em] text-[#e6c364] hover:text-[#ffe08f] uppercase font-medium flex items-center gap-1.5"
+            >
+              EXPLORE FULL ARCHIVE <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            </Link>
+          </div>
+
+          {/* Curated Asymmetric Lookbook Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-12 auto-rows-[240px] md:auto-rows-[280px]">
+            {LOOKBOOK_ITEMS.map((item, idx) => (
+              <div
+                key={idx}
+                className={`group relative overflow-hidden bg-[#131313] rounded-[2px] border border-[#c9a84c]/20 ${item.span}`}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.95]"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                <div className="absolute bottom-4 left-4 right-4 translate-y-3 group-hover:translate-y-0 transition-transform duration-400">
+                  <span className="font-mono text-[9px] text-[#e6c364] tracking-widest uppercase block mb-1 font-medium">
+                    {item.tag}
+                  </span>
+                  <h3 className="font-display text-lg text-[#e5e2e1] font-normal leading-tight">
+                    {item.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Client Reflections / Testimonials Pull-Quotes */}
+          <div className="mt-20 pt-16 border-t border-[#c9a84c]/20">
+            <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-8 text-center">
+              CLIENT REFLECTIONS
+            </span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+              {TESTIMONIALS.map((t, idx) => (
+                <div
+                  key={idx}
+                  className="bg-[#1c1b1b] p-8 border border-[#c9a84c]/20 rounded-[2px] flex flex-col justify-between gap-6"
+                >
+                  <div className="space-y-4">
+                    <span className="font-mono text-[10px] text-[#e6c364] uppercase tracking-widest block font-medium">
+                      {t.highlight}
+                    </span>
+                    <p className="font-display text-lg text-[#e5e2e1] font-light leading-relaxed">
+                      &quot;{t.quote}&quot;
+                    </p>
+                  </div>
+                  <div className="border-t border-[#c9a84c]/15 pt-4">
+                    <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                      {t.name}
+                    </h4>
+                    <span className="font-sans text-[11px] text-[#d0c5b2]">{t.designation}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
       </section>
 
-      {/* Editorial Social */}
-      <section className="py-section-padding bg-surface-container-lowest">
-        <motion.div 
-          className="max-w-container-max mx-auto px-6 mb-12 flex justify-between items-end"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <div>
-            <span className="font-section-head text-section-head text-primary block mb-stack-sm uppercase">Social</span>
-            <h2 className="font-h2-editorial text-h2-editorial text-on-background">Follow the Journey</h2>
-          </div>
-          <span className="font-cta-label text-cta-label text-on-surface flex items-center gap-2 uppercase">
-            @UrbanityAtelier
-          </span>
-        </motion.div>
-
-        {/* Asymmetric Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-4 px-2 md:px-6 max-w-container-max mx-auto">
-          <div className="group relative aspect-square block overflow-hidden bg-surface">
-            <Image 
-              src="https://i.ibb.co/3mSJfP27/Chat-GPT-Image-Apr-27-2026-10-19-32-PM.png" 
-              alt="Gallery image" 
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105" 
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          
-          <div className="group relative aspect-square block overflow-hidden bg-surface md:col-span-2 md:row-span-2">
-            <Image 
-              src="https://i.ibb.co/cc7W5wWV/Chat-GPT-Image-Apr-28-2026-12-25-17-AM.png" 
-              alt="Gallery image" 
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105" 
-              referrerPolicy="no-referrer"
-            />
+      {/* ============================================================ */}
+      {/* 7. PRIVATE CONCIERGE & RITUAL RESERVATION SUITE              */}
+      {/* ============================================================ */}
+      <section
+        id="concierge-booking"
+        ref={conciergeRef}
+        className="w-full bg-[#131313] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+      >
+        <div className="max-w-[1380px] mx-auto">
+          {/* Header */}
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+              07 / PRIVATE CONCIERGE SUITE
+            </span>
+            <h2 className="font-display text-3xl md:text-5xl text-[#e5e2e1] font-light">
+              Reserve Your Consultation or <span className="italic text-[#e6c364]">Signature Ritual</span>
+            </h2>
+            <p className="font-sans text-xs md:text-sm text-[#d0c5b2] mt-3 font-light leading-relaxed">
+              We operate exclusively by appointment to ensure zero wait times and unhurried master-stylist immersion.
+            </p>
           </div>
 
-          <div className="group relative aspect-square block overflow-hidden bg-surface">
-            <Image 
-              src="https://i.ibb.co/7NjTLpFP/Chat-GPT-Image-Apr-27-2026-10-16-43-PM.png" 
-              alt="Gallery image" 
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105" 
-              referrerPolicy="no-referrer"
-            />
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            {/* Left 6 Columns: Refined Luxury Form */}
+            <div className="lg:col-span-7 bg-[#1c1b1b] border border-[#c9a84c]/25 p-8 md:p-12 rounded-[2px] shadow-sm">
+              {formSubmitted ? (
+                <div className="text-center py-12 space-y-6">
+                  <span className="material-symbols-outlined text-4xl text-[#e6c364]">check_circle</span>
+                  <h3 className="font-display text-3xl text-[#e5e2e1]">Consultation Request Received</h3>
+                  <p className="font-sans text-xs md:text-sm text-[#d0c5b2] max-w-md mx-auto leading-relaxed">
+                    Thank you, {clientName || "Valued Guest"}. Our Atelier Concierge will reach out via WhatsApp/Call to
+                    finalize your bespoke slot.
+                  </p>
+                  <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+                    <a
+                      href={`https://wa.me/918578060606?text=${whatsAppMessage}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-sans text-xs tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-6 py-3.5 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all inline-flex items-center justify-center gap-2"
+                    >
+                      <span className="material-symbols-outlined text-base">chat</span>
+                      CONFIRM INSTANTLY VIA WHATSAPP
+                    </a>
+                    <button
+                      onClick={() => setFormSubmitted(false)}
+                      className="font-sans text-xs tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e5e2e1] px-6 py-3.5 rounded-[2px] transition-all font-medium"
+                    >
+                      SUBMIT ANOTHER REQUEST
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-8">
+                  {/* Appointment Type Toggle */}
+                  <div>
+                    <label className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-3">
+                      APPOINTMENT TYPE
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setAppointmentType("Full Ritual Reservation")}
+                        className={`text-left p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
+                          appointmentType === "Full Ritual Reservation"
+                            ? "border-[#c9a84c] bg-[#c9a84c] text-[#080808] font-bold"
+                            : "border-[#c9a84c]/20 bg-[#131313] text-[#e5e2e1] hover:border-[#c9a84c]"
+                        }`}
+                      >
+                        <span className="block font-medium">Signature Ritual Booking</span>
+                        <span className="text-[10px] opacity-80 block mt-0.5">Complete sensory treatment</span>
+                      </button>
 
-          <div className="group relative aspect-square block overflow-hidden bg-surface">
-            <Image 
-              src="https://i.ibb.co/ycKGwDwr/Chat-GPT-Image-Apr-27-2026-10-16-59-PM.png" 
-              alt="Gallery image" 
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105" 
-              referrerPolicy="no-referrer"
-            />
-          </div>
+                      <button
+                        type="button"
+                        onClick={() => setAppointmentType("15-Min Private Diagnostic Consultation")}
+                        className={`text-left p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
+                          appointmentType === "15-Min Private Diagnostic Consultation"
+                            ? "border-[#c9a84c] bg-[#c9a84c] text-[#080808] font-bold"
+                            : "border-[#c9a84c]/20 bg-[#131313] text-[#e5e2e1] hover:border-[#c9a84c]"
+                        }`}
+                      >
+                        <span className="block font-medium">15-Min Private Consultation</span>
+                        <span className="text-[10px] opacity-80 block mt-0.5">Cranial mapping &amp; color preview</span>
+                      </button>
+                    </div>
+                  </div>
 
-          <div className="group relative aspect-square block overflow-hidden bg-surface">
-            <Image 
-              src="https://i.ibb.co/qMrGgvMZ/Chat-GPT-Image-Apr-28-2026-12-22-32-AM.png" 
-              alt="Gallery image" 
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105" 
-              referrerPolicy="no-referrer"
-            />
+                  {/* Stylist Tier & Ritual Selection */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        htmlFor="concierge-tier"
+                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      >
+                        PREFERRED STYLIST TIER
+                      </label>
+                      <select
+                        id="concierge-tier"
+                        value={reservationTier}
+                        onChange={(e) => setReservationTier(e.target.value)}
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
+                      >
+                        <option value="Senior Stylist" className="bg-[#1c1b1b] text-[#e5e2e1]">Senior Stylist</option>
+                        <option value="Artistic Director" className="bg-[#1c1b1b] text-[#e5e2e1]">Artistic Director</option>
+                        <option value="Founder Kiran Kishore" className="bg-[#1c1b1b] text-[#e5e2e1]">Founder Kiran Kishore (Direct Atelier)</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="concierge-ritual"
+                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      >
+                        SELECTED RITUAL / SERVICE
+                      </label>
+                      <select
+                        id="concierge-ritual"
+                        value={selectedRitualName}
+                        onChange={(e) => setSelectedRitualName(e.target.value)}
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
+                      >
+                        {RITUALS.map((r) => (
+                          <option key={r.id} value={r.name} className="bg-[#1c1b1b] text-[#e5e2e1]">
+                            {r.name}
+                          </option>
+                        ))}
+                        <option value="General Aesthetics Consultation" className="bg-[#1c1b1b] text-[#e5e2e1]">General Aesthetics Consultation</option>
+                        <option value="Bridal Dossier & Privé Package" className="bg-[#1c1b1b] text-[#e5e2e1]">Bridal Dossier &amp; Privé Package</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Date & Time Window */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        htmlFor="concierge-date"
+                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      >
+                        PREFERRED DATE
+                      </label>
+                      <input
+                        type="date"
+                        id="concierge-date"
+                        value={preferredDate}
+                        onChange={(e) => setPreferredDate(e.target.value)}
+                        required
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] [color-scheme:dark]"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="concierge-time"
+                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      >
+                        TIME WINDOW
+                      </label>
+                      <select
+                        id="concierge-time"
+                        value={preferredTimeWindow}
+                        onChange={(e) => setPreferredTimeWindow(e.target.value)}
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
+                      >
+                        <option value="Morning Sanctuary (10:00 AM – 1:00 PM)" className="bg-[#1c1b1b] text-[#e5e2e1]">
+                          Morning Sanctuary (10:00 AM – 1:00 PM)
+                        </option>
+                        <option value="Afternoon Atelier (1:00 PM – 5:00 PM)" className="bg-[#1c1b1b] text-[#e5e2e1]">
+                          Afternoon Atelier (1:00 PM – 5:00 PM)
+                        </option>
+                        <option value="Evening Privé (5:00 PM – 9:00 PM)" className="bg-[#1c1b1b] text-[#e5e2e1]">
+                          Evening Privé (5:00 PM – 9:00 PM)
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Client Name & Phone */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        htmlFor="concierge-name"
+                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      >
+                        CLIENT FULL NAME
+                      </label>
+                      <input
+                        type="text"
+                        id="concierge-name"
+                        placeholder="e.g. Eleanor Vance"
+                        value={clientName}
+                        onChange={(e) => setClientName(e.target.value)}
+                        required
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="concierge-phone"
+                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      >
+                        PHONE / WHATSAPP NUMBER
+                      </label>
+                      <input
+                        type="tel"
+                        id="concierge-phone"
+                        placeholder="+91 00000 00000"
+                        value={clientPhone}
+                        onChange={(e) => setClientPhone(e.target.value)}
+                        required
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Notes / History */}
+                  <div>
+                    <label
+                      htmlFor="concierge-notes"
+                      className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                    >
+                      HAIR / SKIN HISTORY OR SPECIFIC PREFERENCES (OPTIONAL)
+                    </label>
+                    <textarea
+                      id="concierge-notes"
+                      rows={3}
+                      placeholder="e.g. Previous balayage treatments, sensitive scalp, event date swatches..."
+                      value={clientNotes}
+                      onChange={(e) => setClientNotes(e.target.value)}
+                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40 resize-none"
+                    />
+                  </div>
+
+                  {/* Submit Action */}
+                  <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                    <button
+                      type="submit"
+                      className="font-sans text-xs tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-8 py-4 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all flex-1 text-center shadow-sm shimmer-btn"
+                    >
+                      REQUEST PRIVATE RESERVATION
+                    </button>
+                    <a
+                      href={`https://wa.me/918578060606?text=${whatsAppMessage}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-sans text-xs tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e6c364] hover:bg-[#c9a84c] hover:text-[#080808] px-6 py-4 rounded-[2px] transition-all text-center inline-flex items-center justify-center gap-2 font-medium"
+                    >
+                      <span className="material-symbols-outlined text-base">chat</span>
+                      WHATSAPP CONCIERGE
+                    </a>
+                  </div>
+                </form>
+              )}
+            </div>
+
+            {/* Right 5 Columns: Coordinates, Concierge Protocol & Map */}
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              {/* Studio Card */}
+              <div className="bg-[#1c1b1b] border border-[#c9a84c]/25 p-8 rounded-[2px]">
+                <span className="font-sans text-[10px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-3">
+                  ATELIER COORDINATES
+                </span>
+                <h3 className="font-display text-2xl text-[#e5e2e1]">Sumrit Mandal Complex</h3>
+                <p className="font-sans text-xs text-[#d0c5b2] mt-1 leading-relaxed">
+                  Tilkamanjhi, Bhagalpur, Bihar
+                </p>
+
+                <div className="mt-6 pt-6 border-t border-[#c9a84c]/20 space-y-3 font-sans text-xs text-[#d0c5b2]">
+                  <div className="flex items-center justify-between">
+                    <span className="uppercase tracking-wider font-semibold text-[#e5e2e1]">HOURS</span>
+                    <span>Monday – Sunday: 10:00 AM – 9:00 PM</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="uppercase tracking-wider font-semibold text-[#e5e2e1]">TELEPHONE</span>
+                    <a href="tel:+918578060606" className="font-mono text-[#e6c364] hover:underline font-medium">
+                      +91 8578060606
+                    </a>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="uppercase tracking-wider font-semibold text-[#e5e2e1]">ARRIVAL</span>
+                    <span>Complimentary Valet Assistance Available</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Minimal Monochrome Architectural Map Card */}
+              <div className="relative aspect-[16/9] w-full rounded-[2px] overflow-hidden border border-[#c9a84c]/25 bg-[#131313]">
+                <Image
+                  src="https://picsum.photos/seed/map1/800/450"
+                  alt="Urbanity Salon Location Map"
+                  fill
+                  className="object-cover filter contrast-[0.9] brightness-[0.7]"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-[#131313]/40 to-transparent" />
+                <div className="absolute inset-0 flex flex-col justify-between p-6">
+                  <div className="flex justify-between items-center text-[10px] font-sans tracking-widest text-[#e6c364] uppercase font-semibold">
+                    <span>TILKAMANJHI SANCTUARY</span>
+                    <span className="w-2 h-2 rounded-full bg-[#e6c364] animate-ping" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-xs text-[#e5e2e1] block">
+                      Sumrit Mandal Complex, Tilkamanjhi
+                    </span>
+                    <a
+                      href="https://maps.google.com/?q=Sumrit+Mandal+Complex+Tilkamanjhi+Bhagalpur"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-flex items-center gap-1.5 font-sans text-[10px] tracking-[0.18em] text-[#e6c364] uppercase hover:underline"
+                    >
+                      OPEN IN GOOGLE MAPS <span className="material-symbols-outlined text-xs">open_in_new</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

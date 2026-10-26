@@ -11,7 +11,7 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
+      setScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
@@ -19,81 +19,153 @@ export function Header() {
   }, []);
 
   const links = [
-    { href: '/', label: 'Home' },
-    { href: '/services', label: 'Services' },
-    { href: '/bridal', label: 'Bridal' },
-    { href: '/gallery', label: 'Gallery' },
-    { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/#ritual-menu', label: 'RITUALS' },
+    { href: '/#the-atelier', label: 'PHILOSOPHY' },
+    { href: '/#directors', label: 'DIRECTORS' },
+    { href: '/#bridal-prive', label: 'BRIDAL PRIVÉ' },
+    { href: '/contact', label: 'CONTACT' },
   ];
 
   return (
     <>
-      <nav aria-label="Global Navigation" className={`fixed top-0 w-full z-[150] transition-all duration-500 ease-out ${menuOpen ? 'bg-background' : scrolled ? 'bg-background/90 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.3)]' : 'bg-transparent border-b border-transparent'}`}>
-        <div className="flex justify-between items-center px-4 md:px-12 h-[56px] md:h-[72px] w-full max-w-[1280px] mx-auto">
-          <Link href="/" className="font-h1-editorial tracking-widest text-primary text-[16px] md:text-[24px]">
-            URBANITY SALON
+      <header
+        role="banner"
+        className={`fixed top-0 left-0 w-full z-[150] transition-all duration-500 ease-out ${
+          menuOpen
+            ? 'bg-[#131313] border-b border-[#c9a84c]/20'
+            : scrolled
+            ? 'bg-[#131313]/92 backdrop-blur-md border-b border-[#c9a84c]/20 shadow-[0_4px_30px_rgba(0,0,0,0.55)]'
+            : 'bg-transparent border-b border-transparent'
+        }`}
+      >
+        <div className="flex justify-between items-center px-6 md:px-12 h-[68px] md:h-[76px] w-full max-w-[1380px] mx-auto">
+          {/* Atelier Wordmark */}
+          <Link href="/" className="group flex flex-col justify-center">
+            <span className="font-display text-xl md:text-2xl tracking-[0.24em] text-[#e5e2e1] group-hover:text-[#e6c364] transition-colors uppercase font-light">
+              URBANITY
+            </span>
+            <span className="font-sans text-[8px] md:text-[9px] tracking-[0.32em] text-[#e6c364] uppercase font-medium -mt-0.5">
+              HAIR ATELIER &amp; PRIVÉ
+            </span>
           </Link>
-          
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-8">
+
+          {/* Desktop Navigation - Minimal & Essential */}
+          <nav aria-label="Atelier Navigation" className="hidden lg:flex items-center gap-8">
             {links.map((link) => {
-              const isActive = pathname === link.href;
+              const isMatch = pathname === link.href || (link.href.startsWith('/#') && pathname === '/');
               return (
                 <Link
-                  key={link.href}
+                  key={link.label}
                   href={link.href}
-                  className={`nav-link font-noto-serif text-[12px] tracking-[0.2em] leading-none uppercase ${
-                    isActive ? 'text-primary' : 'text-stone-400'
-                  }`}
+                  className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#d0c5b2] hover:text-[#e6c364] transition-colors relative py-1 group font-medium"
                 >
                   {link.label}
+                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#e6c364] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
                 </Link>
               );
             })}
-            <Link href="/contact" className="shimmer-btn font-cta-label text-cta-label bg-primary text-background px-6 py-3 rounded uppercase tracking-[0.15em] transition-all hover:bg-white text-center font-bold">
-              Book Appointment
+          </nav>
+
+          {/* Header Action Elements */}
+          <div className="hidden sm:flex items-center gap-5">
+            <a
+              href="tel:+918578060606"
+              className="hidden xl:inline-flex items-center gap-1.5 font-sans text-[11px] tracking-[0.16em] uppercase text-[#d0c5b2] hover:text-[#e6c364] transition-colors"
+              title="Speak with Atelier Concierge"
+            >
+              <span className="material-symbols-outlined text-[15px] text-[#e6c364]">call</span>
+              <span>+91 8578060606</span>
+            </a>
+
+            <Link
+              href="/#concierge-booking"
+              className="inline-flex items-center justify-center font-sans text-[11px] tracking-[0.18em] uppercase bg-[#e6c364] text-[#131313] hover:bg-[#ffe08f] px-5 py-2 rounded-full font-semibold transition-all duration-300 shadow-[0_2px_14px_rgba(230,195,100,0.22)]"
+            >
+              RESERVE
             </Link>
           </div>
 
-          {/* Mobile Hamburger */}
-          <button 
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 relative focus:outline-none"
+          {/* Mobile Hamburger Trigger */}
+          <button
+            className="lg:hidden flex flex-col justify-center items-center w-9 h-9 relative focus:outline-none"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle Navigation"
+            aria-label="Toggle Atelier Menu"
+            aria-expanded={menuOpen}
           >
-            <span className={`block w-6 h-[2px] bg-primary transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[6px]' : '-translate-y-1'}`} />
-            <span className={`block w-6 h-[2px] bg-primary transition-all duration-300 my-[3px] ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
-            <span className={`block w-6 h-[2px] bg-primary transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[6px]' : 'translate-y-1'}`} />
+            <span
+              className={`block w-6 h-[1.5px] bg-[#e6c364] transition-all duration-300 ${
+                menuOpen ? 'rotate-45 translate-y-[6px]' : '-translate-y-1.5'
+              }`}
+            />
+            <span
+              className={`block w-4 h-[1.5px] bg-[#e6c364] transition-all duration-300 my-[3px] ${
+                menuOpen ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+            <span
+              className={`block w-6 h-[1.5px] bg-[#e6c364] transition-all duration-300 ${
+                menuOpen ? '-rotate-45 -translate-y-[6px]' : 'translate-y-1.5'
+              }`}
+            />
           </button>
         </div>
-      </nav>
+      </header>
 
-      {/* Full Screen Overlay Menu */}
-      <div className={`fixed inset-0 bg-background/95 backdrop-blur-2xl z-[140] transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] flex flex-col items-center justify-center ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex flex-col items-center gap-6 text-center mt-12 w-full px-6">
-          {links.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={`font-h2-editorial text-4xl transition-all duration-300 relative group flex items-center ${
-                  isActive ? 'text-primary translate-x-2' : 'text-on-background hover:text-primary hover:translate-x-2'
-                }`}
-              >
-                <span className={`absolute -left-8 w-4 h-[2px] bg-primary rounded-full transition-all duration-300 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0 group-hover:opacity-50 group-hover:scale-50'}`} />
-                {link.label}
-              </Link>
-            );
-          })}
-          <Link href="/contact" onClick={() => setMenuOpen(false)} className="shimmer-btn font-cta-label text-cta-label bg-primary text-background px-8 py-4 w-full max-w-[280px] rounded uppercase tracking-[0.15em] transition-all hover:bg-white mt-8 text-center font-bold">
-            Book Appointment
+      {/* Mobile Editorial Overlay */}
+      <div
+        className={`fixed inset-0 bg-[#131313]/98 backdrop-blur-2xl z-[140] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between p-8 md:p-12 ${
+          menuOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'
+        }`}
+      >
+        <div className="flex justify-between items-center border-b border-[#c9a84c]/20 pb-6 mt-16">
+          <span className="font-sans text-[10px] tracking-[0.22em] text-[#e6c364] uppercase">
+            00 / THE ATELIER DIRECTORY
+          </span>
+          <span className="font-mono text-xs text-[#d0c5b2]">BHAGALPUR</span>
+        </div>
+
+        <div className="flex flex-col gap-6 py-8">
+          {links.map((link, idx) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className="font-display text-2xl md:text-3xl text-[#e5e2e1] hover:text-[#e6c364] transition-colors flex items-center justify-between group"
+            >
+              <span>{link.label}</span>
+              <span className="font-mono text-xs text-[#e6c364]/70 group-hover:translate-x-1 transition-transform">
+                0{idx + 1} →
+              </span>
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="font-display text-2xl md:text-3xl text-[#e5e2e1] hover:text-[#e6c364] transition-colors flex items-center justify-between group"
+          >
+            <span>CONCIERGE &amp; LOCATION</span>
+            <span className="font-mono text-xs text-[#e6c364]/70 group-hover:translate-x-1 transition-transform">
+              08 →
+            </span>
           </Link>
+        </div>
+
+        <div className="pt-6 border-t border-[#c9a84c]/20 flex flex-col gap-4">
+          <Link
+            href="/#concierge-booking"
+            onClick={() => setMenuOpen(false)}
+            className="w-full text-center py-4 bg-[#c9a84c] text-[#0e0e0e] font-sans text-xs uppercase tracking-[0.2em] font-semibold rounded-[2px]"
+          >
+            RESERVE PRIVATE CONSULTATION
+          </Link>
+          <div className="flex justify-between items-center text-[10px] tracking-wider text-[#d0c5b2] font-sans uppercase">
+            <span>Sumrit Mandal Complex</span>
+            <a href="tel:+918578060606" className="text-[#e6c364] hover:underline">
+              +91 8578060606
+            </a>
+          </div>
         </div>
       </div>
     </>
   );
 }
-
