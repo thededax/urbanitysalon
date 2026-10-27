@@ -38,13 +38,13 @@ export function Header() {
             : 'bg-transparent border-b border-transparent'
         }`}
       >
-        <div className="flex justify-between items-center px-6 md:px-12 h-[68px] md:h-[76px] w-full max-w-[1380px] mx-auto">
+        <div className="flex justify-between items-center px-4 sm:px-6 md:px-12 h-[58px] sm:h-[68px] md:h-[76px] w-full max-w-[1380px] mx-auto">
           {/* Atelier Wordmark */}
           <Link href="/" className="group flex flex-col justify-center">
-            <span className="font-display text-xl md:text-2xl tracking-[0.24em] text-[#e5e2e1] group-hover:text-[#e6c364] transition-colors uppercase font-light">
+            <span className="font-display text-lg sm:text-xl md:text-2xl tracking-[0.24em] text-[#e5e2e1] group-hover:text-[#e6c364] transition-colors uppercase font-light">
               URBANITY
             </span>
-            <span className="font-sans text-[8px] md:text-[9px] tracking-[0.32em] text-[#e6c364] uppercase font-medium -mt-0.5">
+            <span className="font-sans text-[7.5px] sm:text-[8px] md:text-[9px] tracking-[0.3em] text-[#e6c364] uppercase font-medium -mt-0.5">
               HAIR ATELIER &amp; PRIVÉ
             </span>
           </Link>
@@ -113,24 +113,24 @@ export function Header() {
 
       {/* Mobile Editorial Overlay */}
       <div
-        className={`fixed inset-0 bg-[#131313]/98 backdrop-blur-2xl z-[140] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between p-8 md:p-12 ${
+        className={`fixed inset-0 bg-[#131313]/98 backdrop-blur-2xl z-[140] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between p-6 sm:p-8 md:p-12 overflow-y-auto max-h-screen ${
           menuOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'
         }`}
       >
-        <div className="flex justify-between items-center border-b border-[#c9a84c]/20 pb-6 mt-16">
-          <span className="font-sans text-[10px] tracking-[0.22em] text-[#e6c364] uppercase">
+        <div className="flex justify-between items-center border-b border-[#c9a84c]/20 pb-4 mt-12 sm:mt-16">
+          <span className="font-sans text-[9px] sm:text-[10px] tracking-[0.22em] text-[#e6c364] uppercase font-semibold">
             00 / THE ATELIER DIRECTORY
           </span>
-          <span className="font-mono text-xs text-[#d0c5b2]">BHAGALPUR</span>
+          <span className="font-mono text-[11px] sm:text-xs text-[#d0c5b2]">BHAGALPUR</span>
         </div>
 
-        <div className="flex flex-col gap-6 py-8">
+        <div className="flex flex-col gap-4 sm:gap-6 py-6 sm:py-8">
           {links.map((link, idx) => (
             <Link
               key={link.label}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="font-display text-2xl md:text-3xl text-[#e5e2e1] hover:text-[#e6c364] transition-colors flex items-center justify-between group"
+              className="font-display text-xl sm:text-2xl md:text-3xl text-[#e5e2e1] hover:text-[#e6c364] transition-colors flex items-center justify-between group"
             >
               <span>{link.label}</span>
               <span className="font-mono text-xs text-[#e6c364]/70 group-hover:translate-x-1 transition-transform">
@@ -139,28 +139,38 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="/contact"
+            href="/services"
             onClick={() => setMenuOpen(false)}
-            className="font-display text-2xl md:text-3xl text-[#e5e2e1] hover:text-[#e6c364] transition-colors flex items-center justify-between group"
+            className="font-display text-xl sm:text-2xl md:text-3xl text-[#e5e2e1] hover:text-[#e6c364] transition-colors flex items-center justify-between group"
           >
-            <span>CONCIERGE &amp; LOCATION</span>
+            <span>SERVICES MENU</span>
             <span className="font-mono text-xs text-[#e6c364]/70 group-hover:translate-x-1 transition-transform">
-              08 →
+              06 →
+            </span>
+          </Link>
+          <Link
+            href="/about"
+            onClick={() => setMenuOpen(false)}
+            className="font-display text-xl sm:text-2xl md:text-3xl text-[#e5e2e1] hover:text-[#e6c364] transition-colors flex items-center justify-between group"
+          >
+            <span>OUR STORY</span>
+            <span className="font-mono text-xs text-[#e6c364]/70 group-hover:translate-x-1 transition-transform">
+              07 →
             </span>
           </Link>
         </div>
 
-        <div className="pt-6 border-t border-[#c9a84c]/20 flex flex-col gap-4">
+        <div className="pt-4 sm:pt-6 border-t border-[#c9a84c]/20 flex flex-col gap-3 sm:gap-4 pb-6 sm:pb-0">
           <Link
             href="/#concierge-booking"
             onClick={() => setMenuOpen(false)}
-            className="w-full text-center py-4 bg-[#c9a84c] text-[#0e0e0e] font-sans text-xs uppercase tracking-[0.2em] font-semibold rounded-[2px]"
+            className="w-full text-center py-3.5 bg-[#c9a84c] text-[#0e0e0e] font-sans text-xs uppercase tracking-[0.2em] font-bold rounded-[2px]"
           >
             RESERVE PRIVATE CONSULTATION
           </Link>
           <div className="flex justify-between items-center text-[10px] tracking-wider text-[#d0c5b2] font-sans uppercase">
             <span>Sumrit Mandal Complex</span>
-            <a href="tel:+918578060606" className="text-[#e6c364] hover:underline">
+            <a href="tel:+918578060606" className="text-[#e6c364] hover:underline font-mono">
               +91 8578060606
             </a>
           </div>

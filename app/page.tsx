@@ -245,7 +245,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/* 1. EDITORIAL ATELIER HERO (MINIMALIST LUXURY BACKGROUND)     */}
       {/* ============================================================ */}
-      <section className="relative min-h-[92vh] lg:min-h-screen flex items-center pt-28 pb-16 lg:py-28 px-6 md:px-12 overflow-hidden bg-[#131313] border-b border-[#c9a84c]/20">
+      <section className="relative min-h-[90vh] lg:min-h-screen flex items-center pt-20 pb-8 sm:pt-24 sm:pb-12 lg:py-28 px-4 sm:px-6 md:px-12 overflow-hidden bg-[#131313] border-b border-[#c9a84c]/20">
         {/* Full-Bleed Editorial Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -262,94 +262,100 @@ export default function HomePage() {
         <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#131313] via-[#131313]/92 sm:via-[#131313]/80 lg:via-[#131313]/40 to-transparent pointer-events-none" />
 
         {/* 2. Top Header Transition Blend */}
-        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#131313] via-[#131313]/70 to-transparent z-[1] pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-28 sm:h-36 bg-gradient-to-b from-[#131313] via-[#131313]/70 to-transparent z-[1] pointer-events-none" />
 
         {/* 3. Bottom Seamless Blend into Continuous Luxury Runway Ticker */}
-        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#0e0e0e] via-[#131313]/80 to-transparent z-[1] pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-32 sm:h-44 bg-gradient-to-t from-[#0e0e0e] via-[#131313]/80 to-transparent z-[1] pointer-events-none" />
 
         {/* 4. Ambient Champagne-Gold Warmth Overlay */}
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_20%_40%,rgba(201,168,76,0.1)_0%,transparent_60%)] pointer-events-none" />
         <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-[radial-gradient(circle,rgba(230,195,100,0.08)_0%,transparent_70%)] z-[1] pointer-events-none" />
 
-        <div className="relative z-10 w-full max-w-[1380px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="relative z-10 w-full max-w-[1380px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           {/* Left Column: Typographic Editorial Narrative & Micro-Highlights */}
           <motion.div
-            className="lg:col-span-7 flex flex-col gap-6 md:gap-7 text-left"
+            className="lg:col-span-7 flex flex-col gap-4 sm:gap-6 md:gap-7 text-left"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Micro-Overline Tracker */}
-            <div className="flex items-center gap-3">
-              <span className="w-8 h-[1px] bg-[#e6c364]" />
-              <span className="font-sans text-[11px] md:text-xs tracking-[0.24em] text-[#e6c364] uppercase font-semibold">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <span className="w-6 sm:w-8 h-[1px] bg-[#e6c364]" />
+              <span className="font-sans text-[10px] sm:text-[11px] md:text-xs tracking-[0.22em] sm:tracking-[0.24em] text-[#e6c364] uppercase font-semibold">
                 URBANITY • BESPOKE HAIR ARCHITECTURE
               </span>
             </div>
 
             {/* Cormorant Garamond Display Headline */}
-            <h1 className="font-display text-[46px] sm:text-[62px] md:text-[74px] lg:text-[84px] leading-[0.94] text-[#e5e2e1] tracking-[-0.02em] font-light drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+            <h1 className="font-display text-[36px] sm:text-[52px] md:text-[68px] lg:text-[84px] leading-[0.96] text-[#e5e2e1] tracking-[-0.02em] font-light drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
               Unleash Your <br />
               <span className="italic font-normal text-[#e6c364]">Inner Radiance.</span>
             </h1>
 
             {/* Concise Editorial Subcopy */}
-            <p className="font-sans text-sm md:text-base text-[#d0c5b2] max-w-xl font-light leading-relaxed drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)]">
+            <p className="font-sans text-xs sm:text-sm md:text-base text-[#d0c5b2] max-w-xl font-light leading-relaxed drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)]">
               Bhagalpur&apos;s sanctuary for cranial silhouette architecture, French dimensional balayage, and clinical scalp trichology—tailored unhurriedly to your unique presence.
             </p>
 
             {/* Dual Pill Action CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
               <Link
                 href="#concierge-booking"
-                className="inline-flex items-center justify-center font-sans text-xs tracking-[0.16em] uppercase bg-[#e6c364] text-[#131313] px-8 py-3.5 rounded-full font-bold hover:bg-[#ffe08f] transition-all duration-300 shadow-[0_4px_22px_rgba(230,195,100,0.28)] hover:scale-[1.02]"
+                className="inline-flex items-center justify-center font-sans text-[11px] sm:text-xs tracking-[0.16em] uppercase bg-[#e6c364] text-[#131313] px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-bold hover:bg-[#ffe08f] transition-all duration-300 shadow-[0_4px_22px_rgba(230,195,100,0.28)] hover:scale-[1.02]"
               >
                 RESERVE CONSULTATION
               </Link>
               <Link
                 href="#ritual-menu"
-                className="inline-flex items-center justify-center font-sans text-xs tracking-[0.16em] uppercase border border-[#c9a84c]/60 text-[#e5e2e1] hover:border-[#e6c364] hover:text-[#e6c364] px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-[#c9a84c]/15 backdrop-blur-sm"
+                className="inline-flex items-center justify-center font-sans text-[11px] sm:text-xs tracking-[0.16em] uppercase border border-[#c9a84c]/60 text-[#e5e2e1] hover:border-[#e6c364] hover:text-[#e6c364] px-6 sm:px-8 py-3 sm:py-3.5 rounded-full transition-all duration-300 hover:bg-[#c9a84c]/15 backdrop-blur-sm"
               >
                 EXPLORE RITUALS →
               </Link>
             </div>
 
-            {/* 3 Horizontal Micro-Feature Highlights (Matching Reference) */}
-            <div className="pt-6 border-t border-[#c9a84c]/20 grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <div className="flex flex-col gap-1.5">
-                <span className="material-symbols-outlined text-2xl text-[#e6c364]">psychology</span>
-                <span className="font-sans text-xs font-semibold uppercase tracking-wider text-[#e5e2e1]">
-                  Diagnostic Precision
-                </span>
-                <p className="font-sans text-[11px] text-[#d0c5b2]/85 leading-normal">
-                  Cranial balance analysis &amp; facial silhouette mapping.
-                </p>
+            {/* 3 Horizontal Micro-Feature Highlights (Compact on Mobile) */}
+            <div className="pt-4 sm:pt-6 border-t border-[#c9a84c]/20 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-6">
+              <div className="flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-1.5 p-2.5 sm:p-0 bg-[#1c1b1b]/50 sm:bg-transparent rounded-[2px] border border-[#c9a84c]/10 sm:border-0">
+                <span className="material-symbols-outlined text-xl sm:text-2xl text-[#e6c364] shrink-0">psychology</span>
+                <div>
+                  <span className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#e5e2e1] block">
+                    Diagnostic Precision
+                  </span>
+                  <p className="font-sans text-[10px] sm:text-[11px] text-[#d0c5b2]/85 leading-tight sm:leading-normal mt-0.5">
+                    Cranial balance analysis &amp; facial silhouette mapping.
+                  </p>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <span className="material-symbols-outlined text-2xl text-[#e6c364]">schedule</span>
-                <span className="font-sans text-xs font-semibold uppercase tracking-wider text-[#e5e2e1]">
-                  Unhurried Sanctuary
-                </span>
-                <p className="font-sans text-[11px] text-[#d0c5b2]/85 leading-normal">
-                  Exclusive 1-on-1 master stylist sessions with zero rush.
-                </p>
+              <div className="flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-1.5 p-2.5 sm:p-0 bg-[#1c1b1b]/50 sm:bg-transparent rounded-[2px] border border-[#c9a84c]/10 sm:border-0">
+                <span className="material-symbols-outlined text-xl sm:text-2xl text-[#e6c364] shrink-0">schedule</span>
+                <div>
+                  <span className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#e5e2e1] block">
+                    Unhurried Sanctuary
+                  </span>
+                  <p className="font-sans text-[10px] sm:text-[11px] text-[#d0c5b2]/85 leading-tight sm:leading-normal mt-0.5">
+                    Exclusive 1-on-1 master stylist sessions with zero rush.
+                  </p>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <span className="material-symbols-outlined text-2xl text-[#e6c364]">eco</span>
-                <span className="font-sans text-xs font-semibold uppercase tracking-wider text-[#e5e2e1]">
-                  Botanical Actives
-                </span>
-                <p className="font-sans text-[11px] text-[#d0c5b2]/85 leading-normal">
-                  Formaldehyde-free keratin &amp; bio-peptide bond integrity.
-                </p>
+              <div className="flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-1.5 p-2.5 sm:p-0 bg-[#1c1b1b]/50 sm:bg-transparent rounded-[2px] border border-[#c9a84c]/10 sm:border-0">
+                <span className="material-symbols-outlined text-xl sm:text-2xl text-[#e6c364] shrink-0">eco</span>
+                <div>
+                  <span className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#e5e2e1] block">
+                    Botanical Actives
+                  </span>
+                  <p className="font-sans text-[10px] sm:text-[11px] text-[#d0c5b2]/85 leading-tight sm:leading-normal mt-0.5">
+                    Formaldehyde-free keratin &amp; bio-peptide bond integrity.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Social & Coordinates Micro-Bar */}
-            <div className="pt-2 flex flex-wrap items-center justify-between gap-4 text-[11px] font-sans text-[#d0c5b2]/80 tracking-widest uppercase">
-              <div className="flex items-center gap-4">
+            <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-[10px] sm:text-[11px] font-sans text-[#d0c5b2]/80 tracking-widest uppercase">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <a
                   href="https://instagram.com"
                   target="_blank"
@@ -425,55 +431,56 @@ export default function HomePage() {
       {/* ============================================================ */}
       <section
         id="the-atelier"
-        className="w-full bg-[#181818] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+        className="relative w-full bg-[#181818] text-[#e5e2e1] py-10 sm:py-16 lg:py-28 px-4 sm:px-6 md:px-12 border-b border-[#c9a84c]/20"
       >
-        <div className="max-w-[1380px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,168,76,0.05)_0%,transparent_50%)] pointer-events-none" />
+        <div className="relative z-10 max-w-[1380px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16">
           {/* Left 4 Columns: Section Index & Formulation Badges */}
           <div className="lg:col-span-4 flex flex-col justify-between">
-            <div className="sticky top-28 space-y-6">
+            <div className="lg:sticky lg:top-28 space-y-4 sm:space-y-6">
               <div>
-                <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+                <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2">
                   02 / OUR PHILOSOPHY
                 </span>
-                <h2 className="font-display text-3xl md:text-4xl text-[#e5e2e1] font-light leading-tight">
+                <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#e5e2e1] font-light leading-tight">
                   Quiet Craft, <br />
                   <span className="italic text-[#e6c364]">Zero Compromise.</span>
                 </h2>
               </div>
 
               {/* Formulation Badges */}
-              <div className="space-y-4 pt-4 border-t border-[#c9a84c]/20">
-                <div className="flex items-start gap-3 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                  <span className="material-symbols-outlined text-lg text-[#e6c364] mt-0.5">spa</span>
+              <div className="space-y-2.5 sm:space-y-3.5 pt-3 sm:pt-4 border-t border-[#c9a84c]/20">
+                <div className="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                  <span className="material-symbols-outlined text-base sm:text-lg text-[#e6c364] mt-0.5 shrink-0">spa</span>
                   <div>
-                    <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                    <h4 className="font-sans text-[11px] sm:text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
                       Bio-Identical Keratin
                     </h4>
-                    <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                    <p className="font-sans text-[11px] sm:text-xs text-[#d0c5b2] leading-relaxed mt-0.5">
                       100% Formaldehyde-Free restorative amino acids.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                  <span className="material-symbols-outlined text-lg text-[#e6c364] mt-0.5">science</span>
+                <div className="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                  <span className="material-symbols-outlined text-base sm:text-lg text-[#e6c364] mt-0.5 shrink-0">science</span>
                   <div>
-                    <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                    <h4 className="font-sans text-[11px] sm:text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
                       Micro-Pigment Balayage
                     </h4>
-                    <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                    <p className="font-sans text-[11px] sm:text-xs text-[#d0c5b2] leading-relaxed mt-0.5">
                       Ammonia-free French lighteners protecting fiber integrity.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                  <span className="material-symbols-outlined text-lg text-[#e6c364] mt-0.5">chair</span>
+                <div className="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                  <span className="material-symbols-outlined text-base sm:text-lg text-[#e6c364] mt-0.5 shrink-0">chair</span>
                   <div>
-                    <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                    <h4 className="font-sans text-[11px] sm:text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
                       Unhurried Sanctuary
                     </h4>
-                    <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                    <p className="font-sans text-[11px] sm:text-xs text-[#d0c5b2] leading-relaxed mt-0.5">
                       1-on-1 private chairs with dedicated acoustic comfort.
                     </p>
                   </div>
@@ -483,39 +490,39 @@ export default function HomePage() {
           </div>
 
           {/* Right 8 Columns: Pull-Quote Statement & 3 Pillars */}
-          <div className="lg:col-span-8 flex flex-col gap-12">
-            <blockquote className="border-l-2 border-[#c9a84c] pl-6 md:pl-8 py-2">
-              <p className="font-display text-2xl md:text-3xl lg:text-4xl text-[#e5e2e1] font-light leading-snug">
+          <div className="lg:col-span-8 flex flex-col gap-6 sm:gap-10 md:gap-12">
+            <blockquote className="border-l-2 border-[#c9a84c] pl-4 sm:pl-6 md:pl-8 py-1.5 sm:py-2">
+              <p className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#e5e2e1] font-light leading-snug">
                 “We do not merely cut or color hair; we decode facial architecture and craft a living silhouette that
                 reframes how you carry yourself through the world.”
               </p>
-              <footer className="mt-4 font-sans text-xs tracking-[0.2em] text-[#e6c364] uppercase font-semibold">
+              <footer className="mt-2.5 sm:mt-4 font-sans text-[11px] sm:text-xs tracking-[0.2em] text-[#e6c364] uppercase font-semibold">
                 — Kiran Kishore, Founder &amp; Creative Director
               </footer>
             </blockquote>
 
             {/* 3 Pillars Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6 border-t border-[#c9a84c]/20">
-              <div className="flex flex-col gap-3 p-6 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                <span className="font-mono text-xs text-[#e6c364] font-semibold">01 / DIAGNOSTIC</span>
-                <h3 className="font-display text-xl text-[#e5e2e1] font-normal">Cranial Precision</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8 pt-4 sm:pt-6 border-t border-[#c9a84c]/20">
+              <div className="flex flex-col gap-2 sm:gap-3 p-4 sm:p-6 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-[11px] sm:text-xs text-[#e6c364] font-semibold">01 / DIAGNOSTIC</span>
+                <h3 className="font-display text-lg sm:text-xl text-[#e5e2e1] font-normal">Cranial Precision</h3>
                 <p className="font-sans text-xs md:text-sm text-[#d0c5b2] leading-relaxed">
                   Every ritual begins with cranial bone structure mapping and fiber elasticity testing before any tool
                   touches hair.
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 p-6 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                <span className="font-mono text-xs text-[#e6c364] font-semibold">02 / FORMULATION</span>
-                <h3 className="font-display text-xl text-[#e5e2e1] font-normal">Artisanal Blends</h3>
+              <div className="flex flex-col gap-2 sm:gap-3 p-4 sm:p-6 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-[11px] sm:text-xs text-[#e6c364] font-semibold">02 / FORMULATION</span>
+                <h3 className="font-display text-lg sm:text-xl text-[#e5e2e1] font-normal">Artisanal Blends</h3>
                 <p className="font-sans text-xs md:text-sm text-[#d0c5b2] leading-relaxed">
                   Botanical elixirs and bond-multiplying peptides freshly combined at your chair to seal cuticle light-refraction.
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 p-6 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                <span className="font-mono text-xs text-[#e6c364] font-semibold">03 / PRIVÉ SANCTUARY</span>
-                <h3 className="font-display text-xl text-[#e5e2e1] font-normal">Discrete Pacing</h3>
+              <div className="flex flex-col gap-2 sm:gap-3 p-4 sm:p-6 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-[11px] sm:text-xs text-[#e6c364] font-semibold">03 / PRIVÉ SANCTUARY</span>
+                <h3 className="font-display text-lg sm:text-xl text-[#e5e2e1] font-normal">Discrete Pacing</h3>
                 <p className="font-sans text-xs md:text-sm text-[#d0c5b2] leading-relaxed">
                   No overlapping appointments, no chaotic salon noise. Hand-crafted herbal teas and focused artistic
                   immersion.
@@ -531,29 +538,29 @@ export default function HomePage() {
       {/* ============================================================ */}
       <section
         id="ritual-menu"
-        className="w-full bg-[#0e0e0e] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+        className="w-full bg-[#0e0e0e] text-[#e5e2e1] py-10 sm:py-16 lg:py-28 px-4 sm:px-6 md:px-12 border-b border-[#c9a84c]/20"
       >
         <div className="max-w-[1380px] mx-auto">
           {/* Menu Header with Category Tabs & Stylist Tier Selector */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-[#c9a84c]/20">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-8 pb-6 sm:pb-10 border-b border-[#c9a84c]/20">
             <div>
-              <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+              <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2">
                 03 / THE RITUAL DIRECTORY
               </span>
-              <h2 className="font-display text-3xl md:text-5xl text-[#e5e2e1] font-light">
+              <h2 className="font-display text-2xl sm:text-4xl md:text-5xl text-[#e5e2e1] font-light">
                 Bespoke Services &amp; <span className="italic text-[#e6c364]">Sensory Rituals</span>
               </h2>
             </div>
 
             {/* Stylist Tier Segmented Selector */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <span className="font-sans text-[10px] tracking-[0.2em] text-[#d0c5b2] uppercase">
+            <div className="flex flex-row items-center justify-between sm:justify-start gap-3 w-full sm:w-auto">
+              <span className="font-sans text-[9px] sm:text-[10px] tracking-[0.2em] text-[#d0c5b2] uppercase">
                 STYLIST TIER:
               </span>
-              <div className="inline-flex bg-[#1c1b1b] p-1 border border-[#c9a84c]/30 rounded-[2px]">
+              <div className="inline-flex bg-[#1c1b1b] p-0.5 sm:p-1 border border-[#c9a84c]/30 rounded-[2px]">
                 <button
                   onClick={() => setStylistTier("Senior Stylist")}
-                  className={`font-sans text-[10px] md:text-[11px] tracking-[0.16em] uppercase px-4 py-2 transition-all rounded-[2px] ${
+                  className={`font-sans text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.14em] sm:tracking-[0.16em] uppercase px-3 sm:px-4 py-1.5 sm:py-2 transition-all rounded-[2px] ${
                     stylistTier === "Senior Stylist"
                       ? "bg-[#c9a84c] text-[#080808] font-bold shadow-sm"
                       : "text-[#d0c5b2] hover:text-[#e5e2e1]"
@@ -563,7 +570,7 @@ export default function HomePage() {
                 </button>
                 <button
                   onClick={() => setStylistTier("Artistic Director")}
-                  className={`font-sans text-[10px] md:text-[11px] tracking-[0.16em] uppercase px-4 py-2 transition-all rounded-[2px] ${
+                  className={`font-sans text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.14em] sm:tracking-[0.16em] uppercase px-3 sm:px-4 py-1.5 sm:py-2 transition-all rounded-[2px] ${
                     stylistTier === "Artistic Director"
                       ? "bg-[#c9a84c] text-[#080808] font-bold shadow-sm"
                       : "text-[#d0c5b2] hover:text-[#e5e2e1]"
@@ -576,7 +583,7 @@ export default function HomePage() {
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex items-center gap-2 md:gap-3 overflow-x-auto py-6 border-b border-[#c9a84c]/15 hide-scrollbar">
+          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 overflow-x-auto py-3.5 sm:py-6 border-b border-[#c9a84c]/15 hide-scrollbar">
             {[
               { id: "all", label: "ALL RITUALS" },
               { id: "cuts", label: "COUTURE CUTS" },
@@ -588,7 +595,7 @@ export default function HomePage() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`whitespace-nowrap font-sans text-[10px] md:text-[11px] tracking-[0.18em] uppercase px-4 py-2 rounded-[2px] transition-all border ${
+                className={`whitespace-nowrap font-sans text-[9.5px] sm:text-[10px] md:text-[11px] tracking-[0.16em] uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-[2px] transition-all border shrink-0 ${
                   activeCategory === cat.id
                     ? "border-[#c9a84c] text-[#080808] bg-[#c9a84c] font-bold"
                     : "border-transparent text-[#d0c5b2] hover:text-[#e5e2e1] hover:border-[#c9a84c]/30"
@@ -600,7 +607,7 @@ export default function HomePage() {
           </div>
 
           {/* 12-Column Layout: 8 cols Ritual Rows + 4 cols Sticky Preview (Desktop) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mt-4 sm:mt-8 items-start">
             {/* Left 8 Columns: Horizontal 1px-Bordered Ritual Rows */}
             <div className="lg:col-span-8 divide-y divide-[#c9a84c]/20">
               {filteredRituals.map((ritual) => {
@@ -613,37 +620,37 @@ export default function HomePage() {
                     key={ritual.id}
                     onMouseEnter={() => setHoveredRitual(ritual)}
                     onFocus={() => setHoveredRitual(ritual)}
-                    className={`group py-6 md:py-8 transition-luxury relative cursor-pointer ${
-                      isHovered ? "bg-[#1c1b1b]/70 px-4 -mx-4 rounded-[2px]" : ""
+                    className={`group py-4 sm:py-6 md:py-8 transition-luxury relative cursor-pointer ${
+                      isHovered ? "bg-[#1c1b1b]/70 px-3 sm:px-4 -mx-3 sm:-mx-4 rounded-[2px]" : ""
                     }`}
                   >
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
                       {/* Ritual Name & Sensory Metadata */}
-                      <div className="flex-1 pr-4">
-                        <div className="flex items-center gap-3 mb-1.5">
-                          <span className="font-mono text-[10px] text-[#e6c364] tracking-widest uppercase">
+                      <div className="flex-1 md:pr-4">
+                        <div className="flex items-center gap-2.5 mb-1">
+                          <span className="font-mono text-[9px] sm:text-[10px] text-[#e6c364] tracking-widest uppercase">
                             {ritual.duration}
                           </span>
                           <span className="text-[#c9a84c]/40">•</span>
-                          <span className="font-sans text-[10px] text-[#d0c5b2] tracking-widest uppercase">
+                          <span className="font-sans text-[9px] sm:text-[10px] text-[#d0c5b2] tracking-widest uppercase">
                             {ritual.category}
                           </span>
                         </div>
-                        <h3 className="font-display text-xl md:text-2xl text-[#e5e2e1] group-hover:text-[#e6c364] transition-colors font-normal">
+                        <h3 className="font-display text-lg sm:text-xl md:text-2xl text-[#e5e2e1] group-hover:text-[#e6c364] transition-colors font-normal">
                           {ritual.name}
                         </h3>
-                        <p className="font-sans text-xs text-[#d0c5b2] mt-2 font-light leading-relaxed max-w-xl">
+                        <p className="font-sans text-xs text-[#d0c5b2] mt-1.5 font-light leading-relaxed max-w-xl">
                           {ritual.formulation}
                         </p>
                       </div>
 
                       {/* Tiered Price & Action Trigger */}
-                      <div className="flex items-center justify-between md:justify-end gap-6 pt-3 md:pt-0 border-t md:border-t-0 border-[#c9a84c]/15">
+                      <div className="flex items-center justify-between md:justify-end gap-4 sm:gap-6 pt-2.5 md:pt-0 border-t md:border-t-0 border-[#c9a84c]/15">
                         <div className="text-left md:text-right">
-                          <span className="font-sans text-[9px] text-[#d0c5b2] uppercase tracking-wider block">
+                          <span className="font-sans text-[8.5px] sm:text-[9px] text-[#d0c5b2] uppercase tracking-wider block">
                             {stylistTier}
                           </span>
-                          <span className="font-mono text-xl md:text-2xl text-[#e6c364] font-medium tabular-numbers">
+                          <span className="font-mono text-lg sm:text-xl md:text-2xl text-[#e6c364] font-medium tabular-numbers">
                             {activePrice}
                           </span>
                         </div>
@@ -653,7 +660,7 @@ export default function HomePage() {
                             e.stopPropagation();
                             handleReserveRitual(ritual);
                           }}
-                          className="font-sans text-[10px] tracking-[0.2em] uppercase bg-transparent text-[#e5e2e1] border border-[#c9a84c]/40 group-hover:border-[#e6c364] group-hover:bg-[#c9a84c] group-hover:text-[#080808] px-4 py-2.5 rounded-[2px] transition-all whitespace-nowrap font-medium"
+                          className="font-sans text-[9px] sm:text-[10px] tracking-[0.18em] uppercase bg-transparent text-[#e5e2e1] border border-[#c9a84c]/40 group-hover:border-[#e6c364] group-hover:bg-[#c9a84c] group-hover:text-[#080808] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-[2px] transition-all whitespace-nowrap font-medium active:scale-95"
                         >
                           RESERVE RITUAL →
                         </button>
@@ -661,12 +668,12 @@ export default function HomePage() {
                     </div>
 
                     {/* Mobile Touch Accordion */}
-                    <div className="lg:hidden mt-4 pt-4 border-t border-[#c9a84c]/15 flex flex-col gap-3">
+                    <div className="lg:hidden mt-3 pt-3 border-t border-[#c9a84c]/15 flex flex-col gap-2.5">
                       <button
                         onClick={() =>
                           setExpandedMobileRitualId(isExpandedMobile ? null : ritual.id)
                         }
-                        className="text-left font-sans text-[10px] tracking-widest text-[#e6c364] uppercase flex items-center justify-between"
+                        className="text-left font-sans text-[9.5px] tracking-widest text-[#e6c364] uppercase flex items-center justify-between"
                       >
                         <span>{isExpandedMobile ? "Hide Formulation Notes" : "View Look & Botanical Notes"}</span>
                         <span className="material-symbols-outlined text-xs">
@@ -778,16 +785,16 @@ export default function HomePage() {
       {/* ============================================================ */}
       <section
         id="directors"
-        className="w-full bg-[#131313] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+        className="w-full bg-[#131313] text-[#e5e2e1] py-10 sm:py-16 lg:py-28 px-4 sm:px-6 md:px-12 border-b border-[#c9a84c]/20"
       >
         <div className="max-w-[1380px] mx-auto">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#c9a84c]/20">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-6 pb-6 sm:pb-12 border-b border-[#c9a84c]/20">
             <div className="max-w-2xl">
-              <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+              <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2">
                 04 / MASTER CRAFTSPEOPLE
               </span>
-              <h2 className="font-display text-3xl md:text-5xl text-[#e5e2e1] font-light">
+              <h2 className="font-display text-2xl sm:text-4xl md:text-5xl text-[#e5e2e1] font-light">
                 Artistic Directors &amp; <span className="italic text-[#e6c364]">Specialists</span>
               </h2>
             </div>
@@ -796,11 +803,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* 3-Column 3:4 Tall Portrait Gallery */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mt-12">
+          {/* 3-Column Compact Portrait Gallery */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 lg:gap-12 mt-6 sm:mt-12">
             {/* Director 1: Kiran Kishore */}
             <div className="group flex flex-col bg-[#1c1b1b] border border-[#c9a84c]/20 rounded-[2px] overflow-hidden">
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#131313]">
+              <div className="relative aspect-[16/10] sm:aspect-[4/3] md:aspect-[3/4] w-full overflow-hidden bg-[#131313]">
                 <Image
                   src="https://www.image2url.com/r2/default/images/1777307279699-b39c8f5c-f80f-4dbf-a53f-bf76c40ec46f.png"
                   alt="Kiran Kishore - Founder and Creative Director"
@@ -808,18 +815,18 @@ export default function HomePage() {
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-[#e5e2e1]">
-                  <span className="font-mono text-[10px] tracking-widest text-[#e6c364] uppercase font-medium">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-[#131313]/20 to-transparent" />
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 text-[#e5e2e1]">
+                  <span className="font-mono text-[9px] sm:text-[10px] tracking-widest text-[#e6c364] uppercase font-medium">
                     ATELIER FOUNDER
                   </span>
-                  <h3 className="font-display text-2xl text-[#e5e2e1]">Kiran Kishore</h3>
+                  <h3 className="font-display text-xl sm:text-2xl text-[#e5e2e1]">Kiran Kishore</h3>
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col justify-between flex-1 gap-4">
+              <div className="p-4 sm:p-6 flex flex-col justify-between flex-1 gap-3 sm:gap-4">
                 <div>
-                  <span className="font-sans text-[10px] tracking-[0.18em] text-[#e6c364] uppercase block mb-1 font-semibold">
+                  <span className="font-sans text-[9px] sm:text-[10px] tracking-[0.18em] text-[#e6c364] uppercase block mb-1 font-semibold">
                     CREATIVE DIRECTION &amp; ARCHITECTURAL CUTS
                   </span>
                   <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed font-light">
@@ -828,7 +835,7 @@ export default function HomePage() {
                 </div>
                 <button
                   onClick={() => handleRequestDirector("Kiran Kishore", "Artistic Director")}
-                  className="font-sans text-[10px] tracking-[0.2em] uppercase border border-[#c9a84c] text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] py-3 text-center transition-all rounded-[2px] font-medium"
+                  className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] py-2.5 sm:py-3 text-center transition-all rounded-[2px] font-medium active:scale-98"
                 >
                   REQUEST DIRECTOR KIRAN →
                 </button>
@@ -837,7 +844,7 @@ export default function HomePage() {
 
             {/* Director 2: Elena Rostova */}
             <div className="group flex flex-col bg-[#1c1b1b] border border-[#c9a84c]/20 rounded-[2px] overflow-hidden">
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#131313]">
+              <div className="relative aspect-[16/10] sm:aspect-[4/3] md:aspect-[3/4] w-full overflow-hidden bg-[#131313]">
                 <Image
                   src="https://i.ibb.co/DDcytst4/Chat-GPT-Image-Apr-28-2026-04-40-10-AM.png"
                   alt="Elena Rostova - Senior Colorist & Balayage Director"
@@ -845,18 +852,18 @@ export default function HomePage() {
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-[#e5e2e1]">
-                  <span className="font-mono text-[10px] tracking-widest text-[#e6c364] uppercase font-medium">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-[#131313]/20 to-transparent" />
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 text-[#e5e2e1]">
+                  <span className="font-mono text-[9px] sm:text-[10px] tracking-widest text-[#e6c364] uppercase font-medium">
                     COLOR DIRECTOR
                   </span>
-                  <h3 className="font-display text-2xl text-[#e5e2e1]">Elena Rostova</h3>
+                  <h3 className="font-display text-xl sm:text-2xl text-[#e5e2e1]">Elena Rostova</h3>
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col justify-between flex-1 gap-4">
+              <div className="p-4 sm:p-6 flex flex-col justify-between flex-1 gap-3 sm:gap-4">
                 <div>
-                  <span className="font-sans text-[10px] tracking-[0.18em] text-[#e6c364] uppercase block mb-1 font-semibold">
+                  <span className="font-sans text-[9px] sm:text-[10px] tracking-[0.18em] text-[#e6c364] uppercase block mb-1 font-semibold">
                     FRENCH BALAYAGE &amp; MICRO-FOIL ARCHITECTURE
                   </span>
                   <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed font-light">
@@ -865,7 +872,7 @@ export default function HomePage() {
                 </div>
                 <button
                   onClick={() => handleRequestDirector("Elena Rostova", "Senior Stylist")}
-                  className="font-sans text-[10px] tracking-[0.2em] uppercase border border-[#c9a84c] text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] py-3 text-center transition-all rounded-[2px] font-medium"
+                  className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] py-2.5 sm:py-3 text-center transition-all rounded-[2px] font-medium active:scale-98"
                 >
                   REQUEST COLORIST ELENA →
                 </button>
@@ -874,7 +881,7 @@ export default function HomePage() {
 
             {/* Director 3: Sophia Chen */}
             <div className="group flex flex-col bg-[#1c1b1b] border border-[#c9a84c]/20 rounded-[2px] overflow-hidden">
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#131313]">
+              <div className="relative aspect-[16/10] sm:aspect-[4/3] md:aspect-[3/4] w-full overflow-hidden bg-[#131313]">
                 <Image
                   src="https://i.ibb.co/LD6jj4DR/Chat-GPT-Image-Apr-28-2026-04-37-05-AM.png"
                   alt="Sophia Chen - Master Bridal & Aesthetics Specialist"
@@ -882,18 +889,18 @@ export default function HomePage() {
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-[#e5e2e1]">
-                  <span className="font-mono text-[10px] tracking-widest text-[#e6c364] uppercase font-medium">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-[#131313]/20 to-transparent" />
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 text-[#e5e2e1]">
+                  <span className="font-mono text-[9px] sm:text-[10px] tracking-widest text-[#e6c364] uppercase font-medium">
                     BRIDAL PRIVÉ SPECIALIST
                   </span>
-                  <h3 className="font-display text-2xl text-[#e5e2e1]">Sophia Chen</h3>
+                  <h3 className="font-display text-xl sm:text-2xl text-[#e5e2e1]">Sophia Chen</h3>
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col justify-between flex-1 gap-4">
+              <div className="p-4 sm:p-6 flex flex-col justify-between flex-1 gap-3 sm:gap-4">
                 <div>
-                  <span className="font-sans text-[10px] tracking-[0.18em] text-[#e6c364] uppercase block mb-1 font-semibold">
+                  <span className="font-sans text-[9px] sm:text-[10px] tracking-[0.18em] text-[#e6c364] uppercase block mb-1 font-semibold">
                     BRIDAL COUTURE &amp; SCALP TRICHOLOGY
                   </span>
                   <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed font-light">
@@ -902,7 +909,7 @@ export default function HomePage() {
                 </div>
                 <button
                   onClick={() => handleRequestDirector("Sophia Chen", "Artistic Director")}
-                  className="font-sans text-[10px] tracking-[0.2em] uppercase border border-[#c9a84c] text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] py-3 text-center transition-all rounded-[2px] font-medium"
+                  className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] py-2.5 sm:py-3 text-center transition-all rounded-[2px] font-medium active:scale-98"
                 >
                   REQUEST SPECIALIST SOPHIA →
                 </button>
@@ -917,12 +924,12 @@ export default function HomePage() {
       {/* ============================================================ */}
       <section
         id="bridal-prive"
-        className="w-full bg-[#181818] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+        className="w-full bg-[#181818] text-[#e5e2e1] py-10 sm:py-16 lg:py-28 px-4 sm:px-6 md:px-12 border-b border-[#c9a84c]/20"
       >
-        <div className="max-w-[1380px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="max-w-[1380px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left 6 Columns: High-Arch Editorial Bridal Frame */}
           <div className="lg:col-span-6 relative">
-            <div className="relative mx-auto max-w-[460px] aspect-[3/4] rounded-arch overflow-hidden border border-[#c9a84c]/35 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+            <div className="relative mx-auto max-w-[340px] sm:max-w-[460px] aspect-[4/3] sm:aspect-[3/4] rounded-arch overflow-hidden border border-[#c9a84c]/35 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
               <Image
                 src="https://i.ibb.co/gLrDP3Y5/Chat-GPT-Image-Apr-28-2026-12-51-11-AM.png"
                 alt="Luxury Bridal Couture at Urbanity Privé Suite"
@@ -931,11 +938,11 @@ export default function HomePage() {
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/80 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 p-4 bg-[#131313]/90 backdrop-blur-md border border-[#c9a84c]/25 rounded-[2px]">
-                <span className="font-sans text-[10px] tracking-[0.22em] text-[#e6c364] uppercase font-semibold block">
+              <div className="absolute bottom-3 sm:bottom-6 left-3 sm:left-6 right-3 sm:right-6 p-3 sm:p-4 bg-[#131313]/90 backdrop-blur-md border border-[#c9a84c]/25 rounded-[2px]">
+                <span className="font-sans text-[9px] sm:text-[10px] tracking-[0.22em] text-[#e6c364] uppercase font-semibold block">
                   SANCTUARY POLICY
                 </span>
-                <p className="font-display text-lg text-[#e5e2e1] font-normal mt-0.5">
+                <p className="font-display text-base sm:text-lg text-[#e5e2e1] font-normal mt-0.5 leading-snug">
                   Exclusively 1 Bride Per Morning in the Private Privé Lounge
                 </p>
               </div>
@@ -943,12 +950,12 @@ export default function HomePage() {
           </div>
 
           {/* Right 6 Columns: Bespoke Bridal Journey & Dossier CTA */}
-          <div className="lg:col-span-6 flex flex-col gap-8">
+          <div className="lg:col-span-6 flex flex-col gap-4 sm:gap-6 md:gap-8">
             <div>
-              <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+              <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2">
                 05 / BRIDAL PRIVÉ &amp; COUTURE SANCTUARY
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#e5e2e1] font-light leading-tight">
+              <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl text-[#e5e2e1] font-light leading-tight">
                 Your Most Sacred Morning, <br />
                 <span className="italic text-[#e6c364]">Curated Without Rush.</span>
               </h2>
@@ -960,50 +967,50 @@ export default function HomePage() {
             </p>
 
             {/* 4-Phase Bridal Timeline */}
-            <div className="space-y-4 pt-2 border-t border-[#c9a84c]/20">
-              <div className="flex items-start gap-4 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                <span className="font-mono text-xs text-[#e6c364] font-semibold mt-0.5">01</span>
+            <div className="space-y-2.5 sm:space-y-3.5 pt-2 border-t border-[#c9a84c]/20">
+              <div className="flex items-start gap-3 sm:gap-4 p-2.5 sm:p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-[11px] sm:text-xs text-[#e6c364] font-semibold mt-0.5">01</span>
                 <div>
-                  <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                  <h4 className="font-sans text-[11px] sm:text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
                     Diagnostic &amp; Face Mapping (8–12 Weeks Prior)
                   </h4>
-                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                  <p className="font-sans text-[11px] sm:text-xs text-[#d0c5b2] leading-relaxed mt-0.5">
                     Jewelry matching, neckline analysis, and scalp health preparation regimen.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                <span className="font-mono text-xs text-[#e6c364] font-semibold mt-0.5">02</span>
+              <div className="flex items-start gap-3 sm:gap-4 p-2.5 sm:p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-[11px] sm:text-xs text-[#e6c364] font-semibold mt-0.5">02</span>
                 <div>
-                  <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                  <h4 className="font-sans text-[11px] sm:text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
                     Skin Radiance &amp; Balayage Glaze (4–6 Weeks Prior)
                   </h4>
-                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                  <p className="font-sans text-[11px] sm:text-xs text-[#d0c5b2] leading-relaxed mt-0.5">
                     Hydra-infusion facial series and color toning calibrated for photographic flash.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                <span className="font-mono text-xs text-[#e6c364] font-semibold mt-0.5">03</span>
+              <div className="flex items-start gap-3 sm:gap-4 p-2.5 sm:p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-[11px] sm:text-xs text-[#e6c364] font-semibold mt-0.5">03</span>
                 <div>
-                  <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                  <h4 className="font-sans text-[11px] sm:text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
                     Full Atelier Rehearsal &amp; Swatch Trial (2–3 Weeks Prior)
                   </h4>
-                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                  <p className="font-sans text-[11px] sm:text-xs text-[#d0c5b2] leading-relaxed mt-0.5">
                     Complete trial in the private suite with gown swatch, veil placement &amp; photography test.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
-                <span className="font-mono text-xs text-[#e6c364] font-semibold mt-0.5">04</span>
+              <div className="flex items-start gap-3 sm:gap-4 p-2.5 sm:p-3 bg-[#131313] border border-[#c9a84c]/20 rounded-[2px]">
+                <span className="font-mono text-[11px] sm:text-xs text-[#e6c364] font-semibold mt-0.5">04</span>
                 <div>
-                  <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
+                  <h4 className="font-sans text-[11px] sm:text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
                     Wedding Day Privé Execution
                   </h4>
-                  <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
+                  <p className="font-sans text-[11px] sm:text-xs text-[#d0c5b2] leading-relaxed mt-0.5">
                     Uninterrupted luxury sanctuary, artisanal refreshments, and calm master-team execution.
                   </p>
                 </div>
@@ -1011,7 +1018,7 @@ export default function HomePage() {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 sm:pt-4">
               <button
                 onClick={() => {
                   setSelectedRitualName("Bespoke Bridal Couture Day Ritual");
@@ -1019,13 +1026,13 @@ export default function HomePage() {
                   setReservationTier("Artistic Director");
                   conciergeRef.current?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="font-sans text-xs tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-8 py-4 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all text-center shimmer-btn"
+                className="font-sans text-[11px] sm:text-xs tracking-[0.16em] sm:tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-6 sm:px-8 py-3 sm:py-4 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all text-center shimmer-btn active:scale-98"
               >
                 REQUEST BRIDAL CONSULTATION
               </button>
               <Link
                 href="/bridal"
-                className="font-sans text-xs tracking-[0.18em] uppercase border border-[#c9a84c]/40 text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] px-8 py-4 rounded-[2px] transition-all text-center font-medium"
+                className="font-sans text-[11px] sm:text-xs tracking-[0.16em] sm:tracking-[0.18em] uppercase border border-[#c9a84c]/40 text-[#e5e2e1] hover:bg-[#c9a84c] hover:text-[#080808] px-6 sm:px-8 py-3 sm:py-4 rounded-[2px] transition-all text-center font-medium active:scale-98"
               >
                 VIEW BRIDAL DOSSIER →
               </Link>
@@ -1039,16 +1046,16 @@ export default function HomePage() {
       {/* ============================================================ */}
       <section
         id="lookbook"
-        className="w-full bg-[#0e0e0e] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+        className="w-full bg-[#0e0e0e] text-[#e5e2e1] py-10 sm:py-16 lg:py-28 px-4 sm:px-6 md:px-12 border-b border-[#c9a84c]/20"
       >
         <div className="max-w-[1380px] mx-auto">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#c9a84c]/20">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-6 pb-6 sm:pb-12 border-b border-[#c9a84c]/20">
             <div>
-              <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+              <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2">
                 06 / EDITORIAL LOOKBOOK &amp; ARCHIVE
               </span>
-              <h2 className="font-display text-3xl md:text-5xl text-[#e5e2e1] font-light">
+              <h2 className="font-display text-2xl sm:text-4xl md:text-5xl text-[#e5e2e1] font-light">
                 Living Silhouettes &amp; <span className="italic text-[#e6c364]">Reflections</span>
               </h2>
             </div>
@@ -1060,12 +1067,14 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Curated Asymmetric Lookbook Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-12 auto-rows-[240px] md:auto-rows-[280px]">
+          {/* Curated Lookbook Grid (2 Cols on Mobile) */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mt-6 sm:mt-12 auto-rows-[140px] sm:auto-rows-[180px] md:auto-rows-[280px]">
             {LOOKBOOK_ITEMS.map((item, idx) => (
               <div
                 key={idx}
-                className={`group relative overflow-hidden bg-[#131313] rounded-[2px] border border-[#c9a84c]/20 ${item.span}`}
+                className={`group relative overflow-hidden bg-[#131313] rounded-[2px] border border-[#c9a84c]/20 ${
+                  idx === 0 ? "col-span-2 row-span-2 md:col-span-2 md:row-span-2" : "col-span-1 row-span-1"
+                }`}
               >
                 <Image
                   src={item.src}
@@ -1074,12 +1083,12 @@ export default function HomePage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.95]"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                <div className="absolute bottom-4 left-4 right-4 translate-y-3 group-hover:translate-y-0 transition-transform duration-400">
-                  <span className="font-mono text-[9px] text-[#e6c364] tracking-widest uppercase block mb-1 font-medium">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-transparent to-transparent opacity-80 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-400" />
+                <div className="absolute bottom-2.5 sm:bottom-4 left-2.5 sm:left-4 right-2.5 sm:right-4 md:translate-y-3 md:group-hover:translate-y-0 transition-transform duration-400">
+                  <span className="font-mono text-[8.5px] sm:text-[9px] text-[#e6c364] tracking-widest uppercase block mb-0.5 sm:mb-1 font-medium">
                     {item.tag}
                   </span>
-                  <h3 className="font-display text-lg text-[#e5e2e1] font-normal leading-tight">
+                  <h3 className="font-display text-sm sm:text-base md:text-lg text-[#e5e2e1] font-normal leading-tight">
                     {item.title}
                   </h3>
                 </div>
@@ -1088,29 +1097,29 @@ export default function HomePage() {
           </div>
 
           {/* Client Reflections / Testimonials Pull-Quotes */}
-          <div className="mt-20 pt-16 border-t border-[#c9a84c]/20">
-            <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-8 text-center">
+          <div className="mt-10 sm:mt-20 pt-8 sm:pt-16 border-t border-[#c9a84c]/20">
+            <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-4 sm:mb-8 text-center">
               CLIENT REFLECTIONS
             </span>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 lg:gap-12">
               {TESTIMONIALS.map((t, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#1c1b1b] p-8 border border-[#c9a84c]/20 rounded-[2px] flex flex-col justify-between gap-6"
+                  className="bg-[#1c1b1b] p-4 sm:p-6 md:p-8 border border-[#c9a84c]/20 rounded-[2px] flex flex-col justify-between gap-3 sm:gap-6"
                 >
-                  <div className="space-y-4">
-                    <span className="font-mono text-[10px] text-[#e6c364] uppercase tracking-widest block font-medium">
+                  <div className="space-y-2.5 sm:space-y-4">
+                    <span className="font-mono text-[9px] sm:text-[10px] text-[#e6c364] uppercase tracking-widest block font-medium">
                       {t.highlight}
                     </span>
-                    <p className="font-display text-lg text-[#e5e2e1] font-light leading-relaxed">
+                    <p className="font-display text-base sm:text-lg text-[#e5e2e1] font-light leading-relaxed">
                       &quot;{t.quote}&quot;
                     </p>
                   </div>
-                  <div className="border-t border-[#c9a84c]/15 pt-4">
+                  <div className="border-t border-[#c9a84c]/15 pt-3 sm:pt-4">
                     <h4 className="font-sans text-xs tracking-wider uppercase font-semibold text-[#e5e2e1]">
                       {t.name}
                     </h4>
-                    <span className="font-sans text-[11px] text-[#d0c5b2]">{t.designation}</span>
+                    <span className="font-sans text-[10px] sm:text-[11px] text-[#d0c5b2]">{t.designation}</span>
                   </div>
                 </div>
               ))}
@@ -1125,63 +1134,63 @@ export default function HomePage() {
       <section
         id="concierge-booking"
         ref={conciergeRef}
-        className="w-full bg-[#131313] text-[#e5e2e1] py-20 lg:py-32 px-6 md:px-12 border-b border-[#c9a84c]/20"
+        className="w-full bg-[#131313] text-[#e5e2e1] py-10 sm:py-16 lg:py-28 px-4 sm:px-6 md:px-12 border-b border-[#c9a84c]/20"
       >
         <div className="max-w-[1380px] mx-auto">
           {/* Header */}
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">
+            <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2">
               07 / PRIVATE CONCIERGE SUITE
             </span>
-            <h2 className="font-display text-3xl md:text-5xl text-[#e5e2e1] font-light">
+            <h2 className="font-display text-2xl sm:text-4xl md:text-5xl text-[#e5e2e1] font-light">
               Reserve Your Consultation or <span className="italic text-[#e6c364]">Signature Ritual</span>
             </h2>
-            <p className="font-sans text-xs md:text-sm text-[#d0c5b2] mt-3 font-light leading-relaxed">
+            <p className="font-sans text-xs md:text-sm text-[#d0c5b2] mt-2 sm:mt-3 font-light leading-relaxed">
               We operate exclusively by appointment to ensure zero wait times and unhurried master-stylist immersion.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16 items-start">
             {/* Left 6 Columns: Refined Luxury Form */}
-            <div className="lg:col-span-7 bg-[#1c1b1b] border border-[#c9a84c]/25 p-8 md:p-12 rounded-[2px] shadow-sm">
+            <div className="lg:col-span-7 bg-[#1c1b1b] border border-[#c9a84c]/25 p-4 sm:p-8 md:p-12 rounded-[2px] shadow-sm">
               {formSubmitted ? (
-                <div className="text-center py-12 space-y-6">
-                  <span className="material-symbols-outlined text-4xl text-[#e6c364]">check_circle</span>
-                  <h3 className="font-display text-3xl text-[#e5e2e1]">Consultation Request Received</h3>
+                <div className="text-center py-8 sm:py-12 space-y-4 sm:space-y-6">
+                  <span className="material-symbols-outlined text-3xl sm:text-4xl text-[#e6c364]">check_circle</span>
+                  <h3 className="font-display text-2xl sm:text-3xl text-[#e5e2e1]">Consultation Request Received</h3>
                   <p className="font-sans text-xs md:text-sm text-[#d0c5b2] max-w-md mx-auto leading-relaxed">
                     Thank you, {clientName || "Valued Guest"}. Our Atelier Concierge will reach out via WhatsApp/Call to
                     finalize your bespoke slot.
                   </p>
-                  <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+                  <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
                     <a
                       href={`https://wa.me/918578060606?text=${whatsAppMessage}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-sans text-xs tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-6 py-3.5 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all inline-flex items-center justify-center gap-2"
+                      className="font-sans text-[11px] sm:text-xs tracking-[0.16em] sm:tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-5 sm:px-6 py-3 sm:py-3.5 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all inline-flex items-center justify-center gap-2"
                     >
                       <span className="material-symbols-outlined text-base">chat</span>
                       CONFIRM INSTANTLY VIA WHATSAPP
                     </a>
                     <button
                       onClick={() => setFormSubmitted(false)}
-                      className="font-sans text-xs tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e5e2e1] px-6 py-3.5 rounded-[2px] transition-all font-medium"
+                      className="font-sans text-[11px] sm:text-xs tracking-[0.16em] sm:tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e5e2e1] px-5 sm:px-6 py-3 sm:py-3.5 rounded-[2px] transition-all font-medium"
                     >
                       SUBMIT ANOTHER REQUEST
                     </button>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-8">
+                <form onSubmit={handleFormSubmit} className="space-y-4 sm:space-y-6 md:space-y-8">
                   {/* Appointment Type Toggle */}
                   <div>
-                    <label className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-3">
+                    <label className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2 sm:mb-3">
                       APPOINTMENT TYPE
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                       <button
                         type="button"
                         onClick={() => setAppointmentType("Full Ritual Reservation")}
-                        className={`text-left p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
+                        className={`text-left p-2.5 sm:p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
                           appointmentType === "Full Ritual Reservation"
                             ? "border-[#c9a84c] bg-[#c9a84c] text-[#080808] font-bold"
                             : "border-[#c9a84c]/20 bg-[#131313] text-[#e5e2e1] hover:border-[#c9a84c]"
@@ -1194,7 +1203,7 @@ export default function HomePage() {
                       <button
                         type="button"
                         onClick={() => setAppointmentType("15-Min Private Diagnostic Consultation")}
-                        className={`text-left p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
+                        className={`text-left p-2.5 sm:p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
                           appointmentType === "15-Min Private Diagnostic Consultation"
                             ? "border-[#c9a84c] bg-[#c9a84c] text-[#080808] font-bold"
                             : "border-[#c9a84c]/20 bg-[#131313] text-[#e5e2e1] hover:border-[#c9a84c]"
@@ -1207,11 +1216,11 @@ export default function HomePage() {
                   </div>
 
                   {/* Stylist Tier & Ritual Selection */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-6">
                     <div>
                       <label
                         htmlFor="concierge-tier"
-                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                        className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                       >
                         PREFERRED STYLIST TIER
                       </label>
@@ -1219,7 +1228,7 @@ export default function HomePage() {
                         id="concierge-tier"
                         value={reservationTier}
                         onChange={(e) => setReservationTier(e.target.value)}
-                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
                       >
                         <option value="Senior Stylist" className="bg-[#1c1b1b] text-[#e5e2e1]">Senior Stylist</option>
                         <option value="Artistic Director" className="bg-[#1c1b1b] text-[#e5e2e1]">Artistic Director</option>
@@ -1230,7 +1239,7 @@ export default function HomePage() {
                     <div>
                       <label
                         htmlFor="concierge-ritual"
-                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                        className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                       >
                         SELECTED RITUAL / SERVICE
                       </label>
@@ -1238,7 +1247,7 @@ export default function HomePage() {
                         id="concierge-ritual"
                         value={selectedRitualName}
                         onChange={(e) => setSelectedRitualName(e.target.value)}
-                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
                       >
                         {RITUALS.map((r) => (
                           <option key={r.id} value={r.name} className="bg-[#1c1b1b] text-[#e5e2e1]">
@@ -1252,11 +1261,11 @@ export default function HomePage() {
                   </div>
 
                   {/* Date & Time Window */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-6">
                     <div>
                       <label
                         htmlFor="concierge-date"
-                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                        className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                       >
                         PREFERRED DATE
                       </label>
@@ -1266,14 +1275,14 @@ export default function HomePage() {
                         value={preferredDate}
                         onChange={(e) => setPreferredDate(e.target.value)}
                         required
-                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] [color-scheme:dark]"
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] [color-scheme:dark]"
                       />
                     </div>
 
                     <div>
                       <label
                         htmlFor="concierge-time"
-                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                        className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                       >
                         TIME WINDOW
                       </label>
@@ -1281,7 +1290,7 @@ export default function HomePage() {
                         id="concierge-time"
                         value={preferredTimeWindow}
                         onChange={(e) => setPreferredTimeWindow(e.target.value)}
-                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
                       >
                         <option value="Morning Sanctuary (10:00 AM – 1:00 PM)" className="bg-[#1c1b1b] text-[#e5e2e1]">
                           Morning Sanctuary (10:00 AM – 1:00 PM)
@@ -1297,11 +1306,11 @@ export default function HomePage() {
                   </div>
 
                   {/* Client Name & Phone */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-6">
                     <div>
                       <label
                         htmlFor="concierge-name"
-                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                        className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                       >
                         CLIENT FULL NAME
                       </label>
@@ -1312,14 +1321,14 @@ export default function HomePage() {
                         value={clientName}
                         onChange={(e) => setClientName(e.target.value)}
                         required
-                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
                       />
                     </div>
 
                     <div>
                       <label
                         htmlFor="concierge-phone"
-                        className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                        className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                       >
                         PHONE / WHATSAPP NUMBER
                       </label>
@@ -1330,7 +1339,7 @@ export default function HomePage() {
                         value={clientPhone}
                         onChange={(e) => setClientPhone(e.target.value)}
                         required
-                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
+                        className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
                       />
                     </div>
                   </div>
@@ -1339,25 +1348,25 @@ export default function HomePage() {
                   <div>
                     <label
                       htmlFor="concierge-notes"
-                      className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                     >
                       HAIR / SKIN HISTORY OR SPECIFIC PREFERENCES (OPTIONAL)
                     </label>
                     <textarea
                       id="concierge-notes"
-                      rows={3}
+                      rows={2}
                       placeholder="e.g. Previous balayage treatments, sensitive scalp, event date swatches..."
                       value={clientNotes}
                       onChange={(e) => setClientNotes(e.target.value)}
-                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40 resize-none"
+                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40 resize-none"
                     />
                   </div>
 
                   {/* Submit Action */}
-                  <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                  <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                     <button
                       type="submit"
-                      className="font-sans text-xs tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-8 py-4 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all flex-1 text-center shadow-sm shimmer-btn"
+                      className="font-sans text-[11px] sm:text-xs tracking-[0.16em] sm:tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-6 sm:px-8 py-3.5 sm:py-4 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all flex-1 text-center shadow-sm shimmer-btn active:scale-98"
                     >
                       REQUEST PRIVATE RESERVATION
                     </button>
@@ -1365,7 +1374,7 @@ export default function HomePage() {
                       href={`https://wa.me/918578060606?text=${whatsAppMessage}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-sans text-xs tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e6c364] hover:bg-[#c9a84c] hover:text-[#080808] px-6 py-4 rounded-[2px] transition-all text-center inline-flex items-center justify-center gap-2 font-medium"
+                      className="font-sans text-[11px] sm:text-xs tracking-[0.16em] sm:tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e6c364] hover:bg-[#c9a84c] hover:text-[#080808] px-5 sm:px-6 py-3.5 sm:py-4 rounded-[2px] transition-all text-center inline-flex items-center justify-center gap-2 font-medium active:scale-98"
                     >
                       <span className="material-symbols-outlined text-base">chat</span>
                       WHATSAPP CONCIERGE
@@ -1376,31 +1385,31 @@ export default function HomePage() {
             </div>
 
             {/* Right 5 Columns: Coordinates, Concierge Protocol & Map */}
-            <div className="lg:col-span-5 flex flex-col gap-6">
+            <div className="lg:col-span-5 flex flex-col gap-4 sm:gap-6">
               {/* Studio Card */}
-              <div className="bg-[#1c1b1b] border border-[#c9a84c]/25 p-8 rounded-[2px]">
-                <span className="font-sans text-[10px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-3">
+              <div className="bg-[#1c1b1b] border border-[#c9a84c]/25 p-4 sm:p-6 md:p-8 rounded-[2px]">
+                <span className="font-sans text-[9.5px] sm:text-[10px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2 sm:mb-3">
                   ATELIER COORDINATES
                 </span>
-                <h3 className="font-display text-2xl text-[#e5e2e1]">Sumrit Mandal Complex</h3>
+                <h3 className="font-display text-xl sm:text-2xl text-[#e5e2e1]">Sumrit Mandal Complex</h3>
                 <p className="font-sans text-xs text-[#d0c5b2] mt-1 leading-relaxed">
                   Tilkamanjhi, Bhagalpur, Bihar
                 </p>
 
-                <div className="mt-6 pt-6 border-t border-[#c9a84c]/20 space-y-3 font-sans text-xs text-[#d0c5b2]">
+                <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-[#c9a84c]/20 space-y-2.5 sm:space-y-3 font-sans text-xs text-[#d0c5b2]">
                   <div className="flex items-center justify-between">
-                    <span className="uppercase tracking-wider font-semibold text-[#e5e2e1]">HOURS</span>
-                    <span>Monday – Sunday: 10:00 AM – 9:00 PM</span>
+                    <span className="uppercase tracking-wider font-semibold text-[#e5e2e1] text-[11px]">HOURS</span>
+                    <span className="text-[11px] sm:text-xs">Monday – Sunday: 10:00 AM – 9:00 PM</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="uppercase tracking-wider font-semibold text-[#e5e2e1]">TELEPHONE</span>
-                    <a href="tel:+918578060606" className="font-mono text-[#e6c364] hover:underline font-medium">
+                    <span className="uppercase tracking-wider font-semibold text-[#e5e2e1] text-[11px]">TELEPHONE</span>
+                    <a href="tel:+918578060606" className="font-mono text-[#e6c364] hover:underline font-medium text-[11px] sm:text-xs">
                       +91 8578060606
                     </a>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="uppercase tracking-wider font-semibold text-[#e5e2e1]">ARRIVAL</span>
-                    <span>Complimentary Valet Assistance Available</span>
+                    <span className="uppercase tracking-wider font-semibold text-[#e5e2e1] text-[11px]">ARRIVAL</span>
+                    <span className="text-[11px] sm:text-xs">Complimentary Valet Assistance Available</span>
                   </div>
                 </div>
               </div>
@@ -1415,20 +1424,20 @@ export default function HomePage() {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-[#131313]/40 to-transparent" />
-                <div className="absolute inset-0 flex flex-col justify-between p-6">
-                  <div className="flex justify-between items-center text-[10px] font-sans tracking-widest text-[#e6c364] uppercase font-semibold">
+                <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6">
+                  <div className="flex justify-between items-center text-[9.5px] sm:text-[10px] font-sans tracking-widest text-[#e6c364] uppercase font-semibold">
                     <span>TILKAMANJHI SANCTUARY</span>
                     <span className="w-2 h-2 rounded-full bg-[#e6c364] animate-ping" />
                   </div>
                   <div>
-                    <span className="font-mono text-xs text-[#e5e2e1] block">
+                    <span className="font-mono text-[11px] sm:text-xs text-[#e5e2e1] block">
                       Sumrit Mandal Complex, Tilkamanjhi
                     </span>
                     <a
                       href="https://maps.google.com/?q=Sumrit+Mandal+Complex+Tilkamanjhi+Bhagalpur"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2 inline-flex items-center gap-1.5 font-sans text-[10px] tracking-[0.18em] text-[#e6c364] uppercase hover:underline"
+                      className="mt-1.5 inline-flex items-center gap-1.5 font-sans text-[9.5px] sm:text-[10px] tracking-[0.18em] text-[#e6c364] uppercase hover:underline"
                     >
                       OPEN IN GOOGLE MAPS <span className="material-symbols-outlined text-xs">open_in_new</span>
                     </a>

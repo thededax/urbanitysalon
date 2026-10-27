@@ -136,29 +136,29 @@ export default function GalleryPage() {
     filter === "all" ? GALLERY_ITEMS : GALLERY_ITEMS.filter((item) => item.category === filter);
 
   return (
-    <main className="w-full bg-[#131313] text-[#e5e2e1] pt-24 pb-32 px-6 md:px-12 selection:bg-[#c9a84c] selection:text-[#080808]">
+    <main className="w-full bg-[#131313] text-[#e5e2e1] pt-16 sm:pt-20 md:pt-24 pb-14 sm:pb-20 md:pb-32 px-3 sm:px-6 md:px-12 selection:bg-[#c9a84c] selection:text-[#080808]">
       <div className="max-w-[1380px] mx-auto">
         {/* Header */}
-        <section className="py-12 md:py-20 text-center max-w-3xl mx-auto border-b border-[#c9a84c]/20">
-          <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-3">
+        <section className="py-6 sm:py-10 md:py-16 text-center max-w-3xl mx-auto border-b border-[#c9a84c]/20">
+          <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2 sm:mb-3">
             01 / CURATED PORTFOLIO ARCHIVE
           </span>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#e5e2e1] font-light leading-tight">
+          <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-[#e5e2e1] font-light leading-tight">
             The Living <span className="italic text-[#e6c364]">Silhouettes</span>
           </h1>
-          <p className="font-sans text-xs md:text-sm text-[#d0c5b2] mt-4 font-light leading-relaxed max-w-xl mx-auto">
+          <p className="font-sans text-xs md:text-sm text-[#d0c5b2] mt-2.5 sm:mt-4 font-light leading-relaxed max-w-xl mx-auto">
             A photographic chronicle of cranial balance haircuts, dimensional French balayage, and serene bridal mornings
             crafted at our Bhagalpur salon.
           </p>
         </section>
 
         {/* Filter Pills */}
-        <div className="flex items-center justify-center gap-2 md:gap-4 overflow-x-auto py-8 border-b border-[#c9a84c]/15 hide-scrollbar">
+        <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 md:gap-4 overflow-x-auto py-3.5 sm:py-6 border-b border-[#c9a84c]/15 hide-scrollbar">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setFilter(cat.id)}
-              className={`whitespace-nowrap font-sans text-[10px] md:text-[11px] tracking-[0.18em] uppercase px-5 py-2.5 rounded-[2px] transition-all border ${
+              className={`whitespace-nowrap font-sans text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.16em] uppercase px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-[2px] transition-all border ${
                 filter === cat.id
                   ? "border-[#c9a84c] bg-[#c9a84c] text-[#080808] font-bold"
                   : "border-transparent text-[#d0c5b2] hover:text-[#e5e2e1] hover:border-[#c9a84c]/30"
@@ -170,7 +170,7 @@ export default function GalleryPage() {
         </div>
 
         {/* Masonry / Asymmetric Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-12 auto-rows-[220px] md:auto-rows-[280px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 mt-6 sm:mt-12 auto-rows-[140px] sm:auto-rows-[200px] md:auto-rows-[280px]">
           {filtered.map((item, idx) => (
             <motion.div
               key={item.title + idx}
@@ -188,12 +188,12 @@ export default function GalleryPage() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.96]"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-[#131313]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-              <div className="absolute bottom-4 left-4 right-4 translate-y-3 group-hover:translate-y-0 transition-transform duration-400">
-                <span className="font-mono text-[9px] text-[#e6c364] tracking-widest uppercase block mb-1 font-medium">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-[#131313]/30 to-transparent opacity-60 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+              <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 sm:translate-y-3 group-hover:translate-y-0 transition-transform duration-400">
+                <span className="font-mono text-[8px] sm:text-[9px] text-[#e6c364] tracking-widest uppercase block mb-0.5 sm:mb-1 font-medium">
                   {item.category.toUpperCase()}
                 </span>
-                <h3 className="font-display text-lg text-[#e5e2e1] font-normal leading-tight">
+                <h3 className="font-display text-xs sm:text-base md:text-lg text-[#e5e2e1] font-normal leading-tight line-clamp-1 sm:line-clamp-none">
                   {item.title}
                 </h3>
               </div>

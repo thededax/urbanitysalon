@@ -33,70 +33,70 @@ export default function ContactPage() {
   );
 
   return (
-    <main className="w-full bg-[#131313] text-[#e5e2e1] pt-24 pb-32 px-6 md:px-12 selection:bg-[#c9a84c] selection:text-[#080808]">
+    <main className="w-full bg-[#131313] text-[#e5e2e1] pt-16 sm:pt-20 md:pt-24 pb-14 sm:pb-20 md:pb-32 px-4 sm:px-6 md:px-12 selection:bg-[#c9a84c] selection:text-[#080808]">
       <div className="max-w-[1380px] mx-auto">
         {/* Header */}
-        <section className="py-12 md:py-20 text-center max-w-3xl mx-auto border-b border-[#c9a84c]/20">
-          <span className="font-sans text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-3">
+        <section className="py-6 sm:py-10 md:py-16 text-center max-w-3xl mx-auto border-b border-[#c9a84c]/20">
+          <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.24em] text-[#e6c364] uppercase font-semibold block mb-2 sm:mb-3">
             01 / CONCIERGE &amp; RESERVATION SUITE
           </span>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#e5e2e1] font-light leading-tight">
+          <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-[#e5e2e1] font-light leading-tight">
             Reserve Your Private <span className="italic text-[#e6c364]">Sanctuary Session</span>
           </h1>
-          <p className="font-sans text-xs md:text-sm text-[#d0c5b2] mt-4 font-light leading-relaxed max-w-xl mx-auto">
+          <p className="font-sans text-xs md:text-sm text-[#d0c5b2] mt-2.5 sm:mt-4 font-light leading-relaxed max-w-xl mx-auto">
             Urbanity Salon operates exclusively by appointment to ensure unhurried master craftsmanship, zero waiting
             lines, and a serene acoustic environment.
           </p>
         </section>
 
         {/* 12-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16 items-start mt-6 sm:mt-12">
           {/* Left Column: Coordinates & Direct Channels (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
+          <div className="lg:col-span-5 flex flex-col gap-4 sm:gap-6">
             {/* Atelier Address Card */}
-            <div className="bg-[#1c1b1b] border border-[#c9a84c]/25 p-8 rounded-[2px] space-y-6">
-              <span className="font-sans text-[10px] tracking-[0.22em] text-[#e6c364] uppercase font-semibold block">
+            <div className="bg-[#1c1b1b] border border-[#c9a84c]/25 p-4 sm:p-6 md:p-8 rounded-[2px] space-y-4 sm:space-y-6">
+              <span className="font-sans text-[9px] sm:text-[10px] tracking-[0.22em] text-[#e6c364] uppercase font-semibold block">
                 ATELIER COORDINATES
               </span>
 
-              <div className="space-y-1">
-                <h3 className="font-display text-2xl text-[#e5e2e1]">Sumrit Mandal Complex</h3>
+              <div className="space-y-0.5 sm:space-y-1">
+                <h3 className="font-display text-xl sm:text-2xl text-[#e5e2e1]">Sumrit Mandal Complex</h3>
                 <p className="font-sans text-xs text-[#d0c5b2] leading-relaxed">
                   Tilkamanjhi, Bhagalpur, Bihar
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#c9a84c]/20 space-y-3 font-sans text-xs text-[#d0c5b2]">
+              <div className="pt-3 sm:pt-4 border-t border-[#c9a84c]/20 space-y-2 sm:space-y-3 font-sans text-xs text-[#d0c5b2]">
                 <div className="flex items-center justify-between">
-                  <span className="uppercase tracking-wider font-semibold text-[#e5e2e1]">STUDIO HOURS</span>
-                  <span>10:00 AM – 9:00 PM (Daily)</span>
+                  <span className="uppercase tracking-wider font-semibold text-[#e5e2e1] text-[10px] sm:text-xs">STUDIO HOURS</span>
+                  <span className="text-[11px] sm:text-xs">10:00 AM – 9:00 PM (Daily)</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="uppercase tracking-wider font-semibold text-[#e5e2e1]">DIRECT TELEPHONE</span>
-                  <a href="tel:+918578060606" className="font-mono text-[#e6c364] hover:underline">
+                  <span className="uppercase tracking-wider font-semibold text-[#e5e2e1] text-[10px] sm:text-xs">DIRECT TELEPHONE</span>
+                  <a href="tel:+918578060606" className="font-mono text-[#e6c364] hover:underline text-[11px] sm:text-xs">
                     +91 8578060606
                   </a>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="uppercase tracking-wider font-semibold text-[#e5e2e1]">VALET SERVICE</span>
-                  <span>Complimentary on arrival</span>
+                  <span className="uppercase tracking-wider font-semibold text-[#e5e2e1] text-[10px] sm:text-xs">VALET SERVICE</span>
+                  <span className="text-[11px] sm:text-xs">Complimentary on arrival</span>
                 </div>
               </div>
             </div>
 
             {/* Quick Contact Banners */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-4">
               <a
                 href="tel:+918578060606"
-                className="bg-[#1c1b1b] border border-[#c9a84c]/20 p-5 rounded-[2px] flex items-center justify-between group hover:border-[#e6c364] transition-luxury"
+                className="bg-[#1c1b1b] border border-[#c9a84c]/20 p-3.5 sm:p-5 rounded-[2px] flex items-center justify-between group hover:border-[#e6c364] transition-luxury"
               >
                 <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-[#e6c364] text-xl">call</span>
+                  <span className="material-symbols-outlined text-[#e6c364] text-lg sm:text-xl">call</span>
                   <div>
-                    <span className="font-sans text-[10px] tracking-widest text-[#d0c5b2] uppercase block">
+                    <span className="font-sans text-[9px] sm:text-[10px] tracking-widest text-[#d0c5b2] uppercase block">
                       TELEPHONE
                     </span>
-                    <span className="font-mono text-sm text-[#e5e2e1]">+91 8578060606</span>
+                    <span className="font-mono text-xs sm:text-sm text-[#e5e2e1]">+91 8578060606</span>
                   </div>
                 </div>
                 <span className="material-symbols-outlined text-xs text-[#e6c364] group-hover:translate-x-1 transition-transform">
@@ -108,15 +108,15 @@ export default function ContactPage() {
                 href={`https://wa.me/918578060606?text=${whatsAppMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#1c1b1b] border border-[#c9a84c]/20 p-5 rounded-[2px] flex items-center justify-between group hover:border-[#e6c364] transition-luxury"
+                className="bg-[#1c1b1b] border border-[#c9a84c]/20 p-3.5 sm:p-5 rounded-[2px] flex items-center justify-between group hover:border-[#e6c364] transition-luxury"
               >
                 <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-[#e6c364] text-xl icon-filled">chat</span>
+                  <span className="material-symbols-outlined text-[#e6c364] text-lg sm:text-xl icon-filled">chat</span>
                   <div>
-                    <span className="font-sans text-[10px] tracking-widest text-[#d0c5b2] uppercase block">
+                    <span className="font-sans text-[9px] sm:text-[10px] tracking-widest text-[#d0c5b2] uppercase block">
                       WHATSAPP CONCIERGE
                     </span>
-                    <span className="font-mono text-sm text-[#e5e2e1]">Direct Consultation Line</span>
+                    <span className="font-mono text-xs sm:text-sm text-[#e5e2e1]">Direct Consultation Line</span>
                   </div>
                 </div>
                 <span className="material-symbols-outlined text-xs text-[#e6c364] group-hover:translate-x-1 transition-transform">
@@ -128,15 +128,15 @@ export default function ContactPage() {
                 href="https://www.instagram.com/urbanity_salon"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#1c1b1b] border border-[#c9a84c]/20 p-5 rounded-[2px] flex items-center justify-between group hover:border-[#e6c364] transition-luxury"
+                className="bg-[#1c1b1b] border border-[#c9a84c]/20 p-3.5 sm:p-5 rounded-[2px] flex items-center justify-between group hover:border-[#e6c364] transition-luxury"
               >
                 <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-[#e6c364] text-xl">photo_camera</span>
+                  <span className="material-symbols-outlined text-[#e6c364] text-lg sm:text-xl">photo_camera</span>
                   <div>
-                    <span className="font-sans text-[10px] tracking-widest text-[#d0c5b2] uppercase block">
+                    <span className="font-sans text-[9px] sm:text-[10px] tracking-widest text-[#d0c5b2] uppercase block">
                       INSTAGRAM SALON
                     </span>
-                    <span className="font-mono text-sm text-[#e5e2e1]">@urbanity_salon</span>
+                    <span className="font-mono text-xs sm:text-sm text-[#e5e2e1]">@urbanity_salon</span>
                   </div>
                 </div>
                 <span className="material-symbols-outlined text-xs text-[#e6c364] group-hover:translate-x-1 transition-transform">
@@ -155,20 +155,20 @@ export default function ContactPage() {
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#131313]/90 via-[#131313]/40 to-transparent" />
-              <div className="absolute inset-0 flex flex-col justify-between p-6">
-                <div className="flex justify-between items-center text-[10px] font-sans tracking-widest text-[#e6c364] uppercase font-semibold">
+              <div className="absolute inset-0 flex flex-col justify-between p-3.5 sm:p-6">
+                <div className="flex justify-between items-center text-[9px] sm:text-[10px] font-sans tracking-widest text-[#e6c364] uppercase font-semibold">
                   <span>TILKAMANJHI COORDINATES</span>
                   <span className="w-2 h-2 rounded-full bg-[#e6c364] animate-ping" />
                 </div>
                 <div>
-                  <span className="font-mono text-xs text-[#e5e2e1] block">
+                  <span className="font-mono text-[11px] sm:text-xs text-[#e5e2e1] block">
                     Sumrit Mandal Complex, Tilkamanjhi
                   </span>
                   <a
                     href="https://maps.google.com/?q=Sumrit+Mandal+Complex+Tilkamanjhi+Bhagalpur"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-2 inline-flex items-center gap-1.5 font-sans text-[10px] tracking-[0.18em] text-[#e6c364] uppercase hover:underline"
+                    className="mt-1 sm:mt-2 inline-flex items-center gap-1.5 font-sans text-[9px] sm:text-[10px] tracking-[0.18em] text-[#e6c364] uppercase hover:underline"
                   >
                     OPEN IN GOOGLE MAPS <span className="material-symbols-outlined text-xs">open_in_new</span>
                   </a>
@@ -178,45 +178,45 @@ export default function ContactPage() {
           </div>
 
           {/* Right Column: Reservation Form (7 cols) */}
-          <div className="lg:col-span-7 bg-[#1c1b1b] border border-[#c9a84c]/25 p-8 md:p-12 rounded-[2px]">
+          <div className="lg:col-span-7 bg-[#1c1b1b] border border-[#c9a84c]/25 p-4 sm:p-8 md:p-12 rounded-[2px]">
             {submitted ? (
-              <div className="text-center py-12 space-y-6">
-                <span className="material-symbols-outlined text-4xl text-[#e6c364]">check_circle</span>
-                <h3 className="font-display text-3xl text-[#e5e2e1]">Reservation Request Dispatched</h3>
+              <div className="text-center py-8 sm:py-12 space-y-4 sm:space-y-6">
+                <span className="material-symbols-outlined text-3xl sm:text-4xl text-[#e6c364]">check_circle</span>
+                <h3 className="font-display text-2xl sm:text-3xl text-[#e5e2e1]">Reservation Request Dispatched</h3>
                 <p className="font-sans text-xs md:text-sm text-[#d0c5b2] max-w-md mx-auto leading-relaxed">
                   Thank you, {name || 'Valued Guest'}. Our concierge team will review your requested slot and contact you
                   promptly to confirm your private session.
                 </p>
-                <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+                <div className="pt-3 sm:pt-4 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
                   <a
                     href={`https://wa.me/918578060606?text=${whatsAppMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-sans text-xs tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-6 py-3.5 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all inline-flex items-center justify-center gap-2"
+                    className="font-sans text-[11px] sm:text-xs tracking-[0.16em] uppercase bg-[#c9a84c] text-[#080808] px-5 sm:px-6 py-3 sm:py-3.5 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all inline-flex items-center justify-center gap-2"
                   >
-                    <span className="material-symbols-outlined text-base">chat</span>
+                    <span className="material-symbols-outlined text-sm sm:text-base">chat</span>
                     CONFIRM INSTANTLY VIA WHATSAPP
                   </a>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="font-sans text-xs tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e5e2e1] px-6 py-3.5 rounded-[2px] transition-all font-medium"
+                    className="font-sans text-[11px] sm:text-xs tracking-[0.16em] uppercase border border-[#c9a84c] text-[#e5e2e1] px-5 sm:px-6 py-3 sm:py-3.5 rounded-[2px] transition-all font-medium"
                   >
                     SUBMIT NEW REQUEST
                   </button>
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 md:space-y-8">
                 {/* Appointment Type Toggle */}
                 <div>
-                  <label className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-3">
+                  <label className="font-sans text-[9px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2 sm:mb-3">
                     APPOINTMENT NATURE
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     <button
                       type="button"
                       onClick={() => setAppointmentType('Signature Ritual Booking')}
-                      className={`text-left p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
+                      className={`text-left p-2.5 sm:p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
                         appointmentType === 'Signature Ritual Booking'
                           ? 'border-[#c9a84c] bg-[#c9a84c] text-[#080808] font-bold'
                           : 'border-[#c9a84c]/20 bg-[#131313] text-[#e5e2e1] hover:border-[#c9a84c]'
@@ -229,7 +229,7 @@ export default function ContactPage() {
                     <button
                       type="button"
                       onClick={() => setAppointmentType('15-Min Private Diagnostic Consultation')}
-                      className={`text-left p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
+                      className={`text-left p-2.5 sm:p-3.5 border rounded-[2px] transition-all font-sans text-xs ${
                         appointmentType === '15-Min Private Diagnostic Consultation'
                           ? 'border-[#c9a84c] bg-[#c9a84c] text-[#080808] font-bold'
                           : 'border-[#c9a84c]/20 bg-[#131313] text-[#e5e2e1] hover:border-[#c9a84c]'
@@ -242,11 +242,11 @@ export default function ContactPage() {
                 </div>
 
                 {/* Stylist Tier & Ritual */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
                   <div>
                     <label
                       htmlFor="contact-tier"
-                      className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      className="font-sans text-[9px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                     >
                       PREFERRED STYLIST TIER
                     </label>
@@ -254,7 +254,7 @@ export default function ContactPage() {
                       id="contact-tier"
                       value={tier}
                       onChange={(e) => setTier(e.target.value)}
-                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
+                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
                     >
                       <option value="Senior Stylist" className="bg-[#1c1b1b] text-[#e5e2e1]">Senior Stylist</option>
                       <option value="Artistic Director" className="bg-[#1c1b1b] text-[#e5e2e1]">Artistic Director</option>
@@ -265,7 +265,7 @@ export default function ContactPage() {
                   <div>
                     <label
                       htmlFor="contact-service"
-                      className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      className="font-sans text-[9px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                     >
                       SELECTED RITUAL
                     </label>
@@ -273,7 +273,7 @@ export default function ContactPage() {
                       id="contact-service"
                       value={service}
                       onChange={(e) => setService(e.target.value)}
-                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
+                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
                     >
                       <option value="Precision Haircut & Cranial Architecture" className="bg-[#1c1b1b] text-[#e5e2e1]">
                         Precision Haircut &amp; Cranial Architecture
@@ -305,11 +305,11 @@ export default function ContactPage() {
                 </div>
 
                 {/* Date & Window */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
                   <div>
                     <label
                       htmlFor="contact-date"
-                      className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      className="font-sans text-[9px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                     >
                       PREFERRED DATE
                     </label>
@@ -319,14 +319,14 @@ export default function ContactPage() {
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
                       required
-                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] [color-scheme:dark]"
+                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] [color-scheme:dark]"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="contact-window"
-                      className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      className="font-sans text-[9px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                     >
                       TIME WINDOW
                     </label>
@@ -334,7 +334,7 @@ export default function ContactPage() {
                       id="contact-window"
                       value={timeWindow}
                       onChange={(e) => setTimeWindow(e.target.value)}
-                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
+                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c]"
                     >
                       <option value="Morning Sanctuary (10:00 AM – 1:00 PM)" className="bg-[#1c1b1b] text-[#e5e2e1]">
                         Morning Sanctuary (10:00 AM – 1:00 PM)
@@ -350,11 +350,11 @@ export default function ContactPage() {
                 </div>
 
                 {/* Name & Phone */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
                   <div>
                     <label
                       htmlFor="contact-name"
-                      className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      className="font-sans text-[9px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                     >
                       CLIENT FULL NAME
                     </label>
@@ -365,14 +365,14 @@ export default function ContactPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
-                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
+                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="contact-phone"
-                      className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                      className="font-sans text-[9px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                     >
                       PHONE / WHATSAPP NUMBER
                     </label>
@@ -383,7 +383,7 @@ export default function ContactPage() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       required
-                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
+                      className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40"
                     />
                   </div>
                 </div>
@@ -392,7 +392,7 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="contact-message"
-                    className="font-sans text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-2"
+                    className="font-sans text-[9px] sm:text-[10px] tracking-[0.2em] text-[#e6c364] uppercase font-semibold block mb-1.5 sm:mb-2"
                   >
                     SPECIFIC REQUESTS OR FIBER HISTORY (OPTIONAL)
                   </label>
@@ -402,15 +402,15 @@ export default function ContactPage() {
                     placeholder="Any prior color processes, chemical smoothing, or event dates we should be aware of?"
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40 resize-none"
+                    className="w-full bg-[#131313] border border-[#c9a84c]/25 text-[#e5e2e1] font-sans text-xs p-2.5 sm:p-3.5 rounded-[2px] focus:outline-none focus:border-[#c9a84c] placeholder:text-[#d0c5b2]/40 resize-none"
                   />
                 </div>
 
                 {/* Form Buttons */}
-                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                   <button
                     type="submit"
-                    className="font-sans text-xs tracking-[0.18em] uppercase bg-[#c9a84c] text-[#080808] px-8 py-4 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all flex-1 text-center shimmer-btn"
+                    className="font-sans text-[11px] sm:text-xs tracking-[0.16em] uppercase bg-[#c9a84c] text-[#080808] px-6 sm:px-8 py-3.5 sm:py-4 rounded-[2px] font-bold hover:bg-[#ffe08f] transition-all flex-1 text-center shimmer-btn"
                   >
                     DISPATCH RESERVATION REQUEST
                   </button>
@@ -418,9 +418,9 @@ export default function ContactPage() {
                     href={`https://wa.me/918578060606?text=${whatsAppMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-sans text-xs tracking-[0.18em] uppercase border border-[#c9a84c] text-[#e6c364] hover:bg-[#c9a84c] hover:text-[#080808] px-6 py-4 rounded-[2px] transition-all text-center inline-flex items-center justify-center gap-2 font-medium"
+                    className="font-sans text-[11px] sm:text-xs tracking-[0.16em] uppercase border border-[#c9a84c] text-[#e6c364] hover:bg-[#c9a84c] hover:text-[#080808] px-5 sm:px-6 py-3.5 sm:py-4 rounded-[2px] transition-all text-center inline-flex items-center justify-center gap-2 font-medium"
                   >
-                    <span className="material-symbols-outlined text-base">chat</span>
+                    <span className="material-symbols-outlined text-sm sm:text-base">chat</span>
                     WHATSAPP CONCIERGE
                   </a>
                 </div>
